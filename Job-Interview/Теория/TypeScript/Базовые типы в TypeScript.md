@@ -108,7 +108,7 @@ age = "thirty"; // ОК
 #### Типизация функций:
 
 Функция с явным указанием типов аргументов и возвращаемого значения:
-```typescipt
+```typescript
 function add(a: number, b: number): number {
   return a + b;
 }
@@ -124,7 +124,7 @@ const multiply = (x: number, y: number): number => x * y;
 Примеры работы с массивами:
 
 `map`:
-```typescipt
+```typescript
 const numbers: number[] = [1, 2, 3];
 const squared: number[] = numbers.map((n: number) => n * n);
 ```
@@ -139,7 +139,7 @@ const sum: number = numbers.reduce((acc: number, curr: number) => acc + curr, 0)
 Используется для обозначения необязательных свойств или параметров.
 
 Пример:
-```typescipt
+```typescript
 interface User {
   id: number;
   name?: string; // Необязательно
@@ -158,7 +158,7 @@ function greet(name?: string): void {
 #### Union и Safety Types:
 
 Union позволяет переменной принимать несколько типов:
-```typescipt
+```typescript
 let value: string | number;
 value = 10;       // ОК
 value = "Hello";  // ОК
@@ -185,7 +185,7 @@ let mixed: (number | string)[] = [1, "two", 3];
 Используется для функций, которые **ничего не возвращают**.
 
 Пример:
-```typescipt
+```typescript
 function logMessage(message: string): void {
   console.log(message);
 }
@@ -202,7 +202,7 @@ let result: void = logMessage("Test");
 - **`undefined`** — переменная объявлена, но не инициализирована.
 - **`null`** — переменная явно не имеет значения.
 
-```typescipt
+```typescript
 let u: undefined = undefined;
 let n: null = null;
 ```
