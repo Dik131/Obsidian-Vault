@@ -97,8 +97,8 @@
 # React Native Interview Questions
 
 ## React Native & Expo
-- [ ] 1. **Чем React Native отличается от React?**  
-  - [ ] 2. **Что такое Expo и EAS? Какие преимущества и ограничения у Expo?**  
+- [ ] 1. **Чем React Native отличается от React?**
+  - [ ] 2. **Что такое Expo и EAS? Какие преимущества и ограничения у Expo?**
   - [ ] 3. **Как работает нативный мост (Native Bridge) в React Native?**  
   - [ ] 4. **Как отлаживать приложения в React Native?**  
   - [ ] 5. **Как использовать нативные модули в React Native?**  
