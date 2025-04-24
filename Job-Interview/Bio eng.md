@@ -1,10 +1,10 @@
----
 
 **[Dmitrii Ivanov](https://ivanovdk-bc.netlify.app/)**  
 Born: 31.03.1993 (_32 years old_)  
 **Developer**
 
 ---
+
 
 ### 2023 — Present
 
