@@ -207,7 +207,7 @@
 ## Архитектура и чистота кода
 
 -  О SOLID
-- Принцип DRY
+- [[DRY, WET, KISS, YAGNI|Принципы DRY, WET, KISS, YAGNI]]
 ## Модульность
 
 - CommonJS
