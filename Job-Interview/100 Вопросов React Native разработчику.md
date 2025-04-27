@@ -9,7 +9,6 @@
   :contentReference[oaicite:3]{index=3}&#8203;:contentReference[oaicite:4]{index=4}
 
 - [ ] **Каковы преимущества использования Expo в проектах React Native?**  
-  :contentReference[oaicite:5]{index=5}&#8203;:contentReference[oaicite:6]{index=6}
 
 - [ ] **Что такое EAS (Expo Application Services) и какие возможности оно предоставляет?**  
   :contentReference[oaicite:7]{index=7}&#8203;:contentReference[oaicite:8]{index=8}
@@ -133,7 +132,7 @@
   - [ ] 30. **Чем отличается == от === ?**
 
 ## Архитектура
-- [ ] 31. **Паттерны: MVC vs MVVM vs Flux**  
+- [ ] 31. **Паттерны: MVC vs MCP vs MVVM vs Flux**  
   - [ ] 32. **Как реализовать Clean Architecture в React Native?**  
   - [ ] 33. **Принципы SOLID в контексте React-приложений**  
   - [ ] 34. **Как организовать масштабируемую структуру проекта?**  
