@@ -5,7 +5,7 @@
 - [ ] **Что такое React Native и как он работает?**
   Фреймворк для создания нативных мобильных приложений с использованием JavaScript и React.&#8203;:contentReference[oaicite:2]{index=2}
 
-- [ ] [[Job-Interview/Теория/React Native/React Native|В чем разница между React Native и другими фреймворками, такими как Ionic, Cordova, Flutter, Tauri, Kotlin multiplatform, Swift UI, Delphi?]]
+- [ ] [[React Native vs others|В чем разница между React Native и другими фреймворками, такими как Ionic, Capacitor, Cordova, Flutter, Tauri, Kotlin multiplatform, Swift UI, Delphi, Unity?]]
 
 - [ ] [[Expo|Каковы преимущества использования Expo в проектах React Native?]]
 
@@ -96,7 +96,7 @@
 
 ## React Native & Expo
 
-- [ ] 1. [[Job-Interview/Теория/React Native/React Native|Чем React Native отличается от React?]] 
+- [ ] 1. [[React Native vs others|Чем React Native отличается от React?]] 
 - [ ] 2.[[Expo|Что такое Expo и EAS? Какие преимущества и ограничения у Expo?]]
   - [ ] 3. **Как работает нативный мост (Native Bridge) в React Native?**  
   - [ ] 4. **Как отлаживать приложения в React Native?**  
