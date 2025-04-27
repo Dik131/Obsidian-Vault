@@ -1,5 +1,5 @@
 [**Dmitrii Ivanov**](https://ivanovdk-bc.netlify.app/) 31.03.1993 (*32*)
-[[https://ivanovdk-cv.netlify.app/|React-Developer]] 
+[React-Developer](https://ivanovdk-cv.netlify.app/) 
 
 2008-9 год - Первое знакомство с программированием: с HTML, CSS и TurboPascal в рамках углублённого школьного курса по информатике. Знакомство с офисным пакетом Microsoft Office, с графическими средами Corel Draw, PhotoShop, Adobe Animate.
 
@@ -83,7 +83,7 @@
 - Прошёл курс по React.JS. По итогу написал PWA с поддержкой работы в оффлайн таск-менеджер, так как хотел упорядочить свои текущие задачи, используя для локального хранилища данных IndexDB и RDK в качестве менеджера состояний - [Weeky](https://weeky.netlify.app/)
 - Прошёл официальный туториал [Expo](https://github.com/IvanovDkLACCTV/Expo-miniCourse)
 - Не много поразбирался с [Socket.IO и Deno](https://github.com/Dik131/deno)
-- Прошёл курс по Node.JS (Express.js) и React Native (Expo). По итогу написал мобильное приложение к ненастоящей базе курсов. Взял иной макет, чем был в курсе для светлой темы и использовал цвета из курса для тёмной темы, а также самостоятельно писал бэк на экспресс, чтобы не использовать api предоставляемые автором курса. В приложении есть авторизация, смена фото пользователя, загрузка курсов и шкалы прогресса **[APK](https://drive.google.com/file/d/1qINTBb7q1WqKikYpudwz7-wWV5pYDfyw/view?usp=drivesdk), [Code](https://github.com/Dik131/course-app)** . Использовал FSD в RN и MVC в Express.js, в качестве менеджера состояний использовался Jotai
+- Прошёл курс по Node.JS (Express.js) и React Native (Expo). По итогу написал мобильное приложение к ненастоящей базе курсов. Взял иной макет, чем был в курсе для светлой темы и использовал цвета из курса для тёмной темы, а также самостоятельно писал бэк на экспресс, чтобы не использовать api предоставляемые автором курса. В приложении есть авторизация, смена фото пользователя, загрузка курсов и шкалы прогресса **[APK](https://drive.google.com/file/d/1qINTBb7q1WqKikYpudwz7-wWV5pYDfyw/view?usp=drivesdk), [Code](https://github.com/Dik131/course-app)** , [Backend](https://express-backend-3p61.onrender.com). Использовал FSD в RN и MVC в Express.js, в качестве менеджера состояний использовался Jotai
 - Сейчас начал курсы по Next.JS и Nest.JS - там два курса от одного автора. В курсе про Nest пишется бэкенд для курса по Next, потому решил изучать параллельно. В качестве менеджера состояний буду использовать Zustand (недавно прошёл официальный туториал). [Код проекта](https://github.com/Dik131/NestNextZustand)
 - Следующий на очереди курс по Electron.js - уже несколько раз использовал в работе, но хочу разобраться подробнее (особенно меня вдохновило приложение Balena Etcher - это аналог Rufus - приложение для записи установочных образов на flash накопители - но написанный на Electron и весящий всего 70 МБ)
 - Уже написал парочку приложений на Next.JS: моя визитная карточка [Ivanov Dmitrii](https://ivanovdk-bc.netlify.app/) и клон (пока без подключения к БД и авторизации) [Google Drive](https://theo-gdrive-clone-next-app.netlify.app/)
