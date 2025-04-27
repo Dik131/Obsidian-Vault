@@ -8,7 +8,7 @@
 - [ ] **В чем разница между React Native и другими фреймворками, такими как Ionic или Cordova?**  
   :contentReference[oaicite:3]{index=3}&#8203;:contentReference[oaicite:4]{index=4}
 
-- [ ] **Каковы преимущества использования Expo в проектах React Native?**  
+- [ ] [[Expo|Каковы преимущества использования Expo в проектах React Native?]]
 
 - [ ] **Что такое EAS (Expo Application Services) и какие возможности оно предоставляет?**  
   :contentReference[oaicite:7]{index=7}&#8203;:contentReference[oaicite:8]{index=8}
@@ -97,7 +97,7 @@
 
 ## React Native & Expo
 - [ ] 1. **Чем React Native отличается от React?**
-  - [ ] 2. **Что такое Expo и EAS? Какие преимущества и ограничения у Expo?**
+  - [ ] 2.[[Expo|**Что такое Expo и EAS? Какие преимущества и ограничения у Expo?**]]
   - [ ] 3. **Как работает нативный мост (Native Bridge) в React Native?**  
   - [ ] 4. **Как отлаживать приложения в React Native?**  
   - [ ] 5. **Как использовать нативные модули в React Native?**  
