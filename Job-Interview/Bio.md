@@ -1,5 +1,5 @@
 [**Dmitrii Ivanov**](https://ivanovdk-bc.netlify.app/) 31.03.1993 (*32*)
-**Developer**
+[[https://ivanovdk-cv.netlify.app/|React-Developer]]
 
 2008-9 год - Первое знакомство с программированием: с HTML, CSS и TurboPascal в рамках углублённого школьного курса по информатике. Знакомство с офисным пакетом Microsoft Office, с графическими средами Corel Draw, PhotoShop, Adobe Animate.
 
