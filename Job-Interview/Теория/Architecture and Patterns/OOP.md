@@ -153,3 +153,5 @@ export default function App() {
 - **Наследование** — "Сын как отец, но со своими фишками."
     
 - **Полиморфизм** — "Общая кнопка работает с разными вещами по-разному."
+
+[Статья на тему](https://purpleschool.ru/blog/obektno-orientirovannoe-programmirovanie-ot-osnov-k-masterstvu)
