@@ -1,0 +1,2308 @@
+thank you
+[Music]
+all right hello welcome back for lecture
+one and this week we're going to be
+diving into more JavaScript and talking
+about es6
+so previous lecture we talked about a
+few different topics types being one who
+can name some types that we talked about
+last last week
+anyone a string
+a number
+null
+undefined
+object and
+symbol and
+true or false
+a Boolean yeah we talked about coercion
+which was the process by which we change
+one type to another
+objects of course the non-primitive type
+prototypal inheritance who can remember
+what prototype inheritance was
+this was one of the the complex topics
+from last week
+yeah
+object has a prototype property
+yeah exactly it's the process by which a
+more complex object can have methods and
+properties we talked about scope which
+is basically how long a variable lives
+uh how JavaScript gets executed the
+global object and then I left you on a
+cliffhanger about closures
+but before we dive into closures I just
+want to give a little bit of more
+background on what these es5 es6 2016
+2017 yes next what are those
+um so we talked a little bit last week
+on what ecmascript was ecmascript is
+basically the spec for this language it
+defines exactly what this language
+should do and the
+um how a bunch of these functions behave
+and JavaScript is actually an
+implementation of the ecmascript spec
+and so what which of these versions do
+environment support because every year
+roughly a new version comes out
+so this is a little bit of a tricky
+question it's kind of the bane of all
+JavaScript programmers existence because
+we really don't know exactly what
+environment our code is going to be run
+in and therefore we don't really know
+exactly what is supported and so
+generally what we do is we the
+convention is to assume that the
+environment supports all of es5
+and so what are we supposed to do about
+these future
+um
+language things that we can use
+us a big thing in JavaScript right now
+is what's called a transpiler a
+transpiler is basically some code that
+goes from newer language features and
+actually makes it backwards compatible
+with the es5 spec so basically it takes
+all of your new language
+um any functions you're using that's
+defined by es6 es2016 and Beyond and
+actually turns them into code that's
+basically es5 code so some of these the
+most popular ones probably Babel but
+other ones you may have heard of are
+typescript or copyscripts Etc
+um so which syntax should we use
+generally what people do is they they
+use the future syntax because either the
+language and the environments will catch
+up or we just transpile things back to
+es5
+does that make sense to everybody
+so in this course we'll be using a lot
+of es6 and Beyond features
+cool so going back to last week we
+talked a bit about closures or at least
+I showed you exactly what the problem
+behind closures were but to explain
+exactly what they are it's functions
+basically
+have access to variables that are around
+when functions are defined and these
+functions actually retain the ability to
+use variables declared by a parent
+function even after that parent function
+has returned and possibly disappeared
+and this is possible because of
+JavaScript scoping and so let's let's
+see an example of how this works in
+action
+so last week I talked about a possible
+bug with using closures and let me just
+type that out really quick so we had a
+function
+and basically what it does is it creates
+a new
+array
+and pushes a bunch of functions to that
+array and so let's do
+um so does everybody following along
+what's going on here so basically I'm
+creating a new empty array
+um I'm iterating through the numbers
+zero through five and pushing on a
+function to that array which will
+console.log I
+um and then I'm going ahead and invoking
+that and storing the return as function
+array and I'm going in and invoking
+the first one
+and as we saw last week even though we
+expected
+this to console.log zero it actually
+console logs five and so this week we're
+going to go ahead and explain exactly
+what that happens
+um so before we do that let's actually
+explore closures a little more deeply
+and so what did we say a closure was a
+closure is basically a function that has
+access to some variables that might have
+already left scope so basically let's
+create a function
+okay so what I just did here is I wrote
+a function that declares a variable
+called message this message is just set
+to the string called hello
+and then we create a new function that
+console logs a variable called message
+and then return that function
+and so at line 11 we invoke that and so
+at line 12 what is the value of message
+here
+can anybody tell me
+yeah it's not it's going to actually err
+because there's no such thing called
+message
+yet
+so let's just confirm that
+we have an error because message is not
+defined
+but now let's
+comment that out and run the code
+and what we see is that say hello will
+actually console.log that message and so
+let's
+dive a little bit more deeply into this
+so we see that type of message at that
+point is undefined and if we console.log
+what say hello is is console logging a
+variable called message and when we
+invoke that
+it prints hello and so that there is a
+closure because we can see that
+the variable called message
+when say hello is invoked does not
+actually exist yet say hello still has
+access to this message up here because
+it was invoked it was within Scope when
+that function was created
+and so that is what a closure is
+does that make sense to everybody
+nope so the question was would it make a
+difference if rather than having a
+concert here we had a VAR or a let
+um and no it does not
+any other questions about this closure
+example
+no so now let's go ahead and explore
+exactly
+why
+um
+this bug exists
+and so here
+what is the value
+of I
+can anybody tell me
+is it four
+right here at line 13.
+yeah
+yeah it's going to be undefined right
+just because it's not actually within
+scope at that point
+but as we talked about in the last
+example
+because of closures functions that are
+declared have access to their variables
+at the point of Declaration and so now
+right here what is the value of I
+can anybody tell me
+it's going to be five right because we
+iterated through the number zero and
+five and by the time we got to five
+that's that was where I was left and
+since it was declared with VAR a VAR its
+life cycle was basically until the
+function ends and so at line eight right
+there I has a value of five
+and so that's what gets wrapped up in
+the closure at line five and so when we
+invoke line 15
+it now prints out five
+does that make sense to everybody
+it's a little bit strange it's hard to
+wrap your head around but does that kind
+of make sense to why that's happening
+so if we instead of using a VAR here
+because var's life cycle is from when
+it's declared until the end of its
+function so line 11 what happens if we
+instead use a let
+so what is the scope of a variable
+declared with the let keyword
+anybody remember from last lecture
+yeah exactly until the end of the code
+block and so this variable called I
+it ends at line six
+and so if we try to control that log I
+here
+we get oh it does not exist
+and so I for each time
+um this or this
+um for Loop runs it only exists
+uh its scope is only from line four to
+line six
+therefore this one the closure will
+actually work as expected
+so when we run this
+it prints out a zero as expected
+does that make sense to everybody
+it is a little bit weird and I'm about
+to show you an alternate way to create
+closures
+but does this difference in scoping
+make sense to why it would print a five
+versus a zero
+so
+sorry I can't ask a question of course
+if you have another variable
+outside the
+uh so the question was what happens if
+we had another variable called I outside
+the for Loop well if we had one
+um declared with a letter or a const
+keyword line five would error because we
+cannot create multiple
+or const with the same names
+um if it were a VAR then it would get
+shadowed by this one and basically be
+overwritten
+any other questions with this example
+if
+ah so what the question is what happens
+if we created a
+I variable outside so if we did let I
+equal some number
+basically the closure would wrap up the
+most specific variable so since this
+variable is more specifically
+declared than the I outside it would
+bind with this one
+so if we round this
+it printed zero
+cool so let's let's look at another way
+to create a closure
+um so has anybody heard of immediately
+invoked function expression or the term
+iffy I Ife for short
+so basically what an iffy is is there's
+a function expression that gets invoked
+immediately
+and so this also creates a closure
+can anybody has anybody seen this before
+or heard of it
+um so question was it is it like a
+nameless function
+in a way yes it's a nameless function
+oftentimes but it it's a nameless
+function that gets invoked immediately
+um
+I'll show you what that looks like
+and the benefit of using an iffy is that
+it doesn't add or modify the global
+object so we talked about last week how
+when you create variables or create
+functions those functions are actually
+attached to the global object
+but with iffys since they're just
+statements that are immediately invoked
+they do not add to the global object so
+let's take a look at what those look
+like
+um so say we had something like
+so we in the previous closure example we
+defined this thing called uh hello
+function which was basically a function
+actually let's just
+copy that directly
+uh so we defined a make hello function
+which had a message called hello uh
+which got wrapped into closure by the
+say hello function and we return that
+function
+and so as part of the global object we
+have this thing called make hello
+function which might not be ideal if we
+are running low on like names or
+functions that we can use and so a way
+to basically create the same closure
+without actually creating a globally
+um scoped function is
+um an iffy so let's see what that looks
+like
+so the goal is to have a stay hello
+function which
+basically gets created by this make a
+low function with a variable called
+message that gets wrapped into closure
+and so another way we could do that
+would be just saying con say hello
+is equal to this function
+and we can make it an anonymous function
+but that's actually immediately invoke
+it
+so does everybody see what happened here
+so we went from this where it's make
+hello function
+which is declared as a function which
+you can use anywhere in your code and
+then at line 11 we go ahead and invoke
+that function which returns that
+function defined at line four which is a
+say hello function that wraps that VAR
+message in a closure
+but here
+instead we don't create a function
+called make hello function instead we
+declare an anonymous function
+which just gets invoked immediately at
+line nine and so we're left with that
+same exact function which is defined on
+line four where it's a function that
+console.log is a message which is
+defined by its parent function
+but we don't actually have to create
+that global
+function name
+does that make sense to everybody
+and so if we ran this
+we see the same exact thing
+so my why might and iffy be useful
+so say
+let's delete these
+so say we want to have some class or
+something called a counter and we want
+to keep track of some
+some number that we can just keep
+incrementing and we can get that number
+but say we also did not want that number
+to be accessible
+to other people
+how might we go about doing that
+one way would be to use an iffy and so
+we can actually create that variable
+within
+um a very limited function scope that is
+non-accessible globally
+and so doing that real quick we can do
+we can create this thing called a
+counter
+which is a function
+where within here we create this
+variable called account
+and we set it equal to zero
+and then we can do something like return
+an object
+where if we do something like increment
+it's actually a function
+which does count
+equals count plus one
+so it just increments that count
+or we can have a function called get
+which just returns
+or let's just control log
+the count
+so this creates a function but instead
+we actually want that object back so we
+can actually wrap that function in
+parentheses and immediately invoke it
+and now we have this count now we have
+an object that has an ink and a get
+function and we can go ahead and invoke
+those so we can do counter dot get
+counter dot Inc ounter dot get
+and if we run that we can see it gets to
+the zero increments it and then prints
+out the one but nowhere does anybody
+have access to that variable at line 12
+because it's wrapped in that function
+that nobody can access because its scope
+is limited to lines 11 through 18 and
+the only things that have access to that
+variable are The Returned functions
+and so that that count variable is not
+accessible in the global scope
+does that make sense to everybody
+do we see how that could be useful
+any questions
+so how might we be able to use
+um iffes to solve that closure problem
+from earlier
+so let's copy that closure bug to
+so we have this from earlier
+which is buggy
+how might we use an iffy to solve this
+problem
+the goal is now to print zero
+any any thoughts
+so what if instead of pushing a function
+that console.logs I
+we create a function that returns a
+function that console.logs I and pass in
+I
+a little bit weird
+so now we have a function that returns a
+function that console.log something
+called I
+know we can do is we can immediately
+invoke
+that function
+with I
+do people see how that creates
+a closure by using an iffy
+so let's change a couple of these
+variable names so that it's easier to
+see
+so we're pushing onto that array the
+result of a function that returns a
+function that comes with the logs X
+and what do we pass in as X we pass in I
+and so that creates a closure around
+that value of x
+which is then accessible later on in the
+code so if we go ahead and run this
+we get that zero as expected
+any questions on that
+is that a question
+it is a little bit crazy this is not
+something that you use every day but
+this is something that it helps to know
+because you might see things like
+libraries get imported by using an iffy
+so that a lot of the variables that they
+declare while creating a library don't
+pollute the global scope
+all right moving on so first class
+function so who knows what a first class
+function is
+has anybody heard this term before
+so first class functions basically
+describes the way that language handles
+functions and so in JavaScript classes
+are first class citizens people like to
+say or in other words functions are
+treated the same way as any other value
+and so as you learned last week that
+functions are really just objects
+everything that isn't a primitive is
+just an object so it really makes sense
+that functions can be treated as other
+values
+so functions can be assigned to
+variables we've seen that when we do
+something like const say hello equals
+some Anonymous function they can be
+assigned into array values which we saw
+with this previous example where we're
+pushing onto the array Anonymous
+functions
+and they can be set as object values
+which we saw in our iffy example when we
+returned an object that had an ink and a
+get function
+they can also be passed as arguments to
+other functions there's nothing stopping
+us from declaring a function which
+expects to function as an argument
+um and what that does is it allows oh
+they can also be returned from functions
+as we saw earlier
+um
+in the previous example we saw a
+function that returned another function
+and so that's it allows the creation of
+higher order functions so higher order
+function is basically any function that
+takes one or more functions as arguments
+or returns a function
+and so some big examples of those are
+map filter and reduce
+so does anybody have any questions on
+what a first-class citizen means or a
+first class function
+we have seen almost all of these bullet
+size examples in the past couple days
+cool so that's has everybody heard of
+map filter and reduce
+has anybody not
+okay so basically these are three of the
+most famous uh higher order functions
+um what map does is it's an operation
+that can be done to an array and what it
+does is is it Maps a particular function
+any function to every single value in
+the array and then the array you get
+back an array where the values in the
+array are the result of passing the
+original values into some given function
+what the heck does that mean well
+it just happens to be that map is
+already built into the array class so if
+we create an array like const
+um
+x equals an array with zero one two
+three
+and say we create some function called
+add
+one
+and it takes in a number
+let's actually do this in node
+um
+so say we had a
+an array with 0 1 2 3
+and we had a function called add
+1 which takes some number
+and it returns
+the number plus one
+and so if we do add one to one what do
+we expect to be returned
+two and how about if we did zero
+we expect one one returns two two
+returns three three turns four and so if
+we were to map that function to each of
+the values in that array we should
+expect to have an array that has one two
+three and four and so if we do x dot map
+which is built into the array
+if we passed in that function called add
+one
+it basically maps that function to each
+value in that array and Returns the new
+one the new value
+and so as we expected 0 1 2 3 returns
+one two three four
+any questions on map
+so what were the other two filters so
+filters basically another high order
+function where it expects a function and
+this function that you pass in can
+either return true or false and
+basically what filter does is it retains
+the values that return true and gets rid
+of the values that return false
+and so we have say we have a function
+called is greater than
+one
+it takes a number
+and it returns
+whether that number is greater than one
+it Returns what that number is greater
+than one so say we passing is greater
+than one
+a number like a hundred we expect it to
+be true if we pass it in a number like
+one we expect it to be false and say we
+were to filter
+that original Ray zero one two three by
+the function is greater than one what do
+we expect
+to get back
+is zero greater than one
+no so it shouldn't be included nor is
+one but two and three are and so if we
+filter is by is greater than one we get
+two and three back
+and the last high order function that
+we'll talk about is called reduce and
+basically what reduced does is it takes
+an array of multiple values and reduces
+it into a single value
+and basically what that does is it takes
+a function that expects two arguments
+where the first argument is some
+accumulator basically it marches down
+each value and returns that accumulator
+to the next value and the second
+argument is whatever is next in that
+array and so basically if we were to
+define a function called add
+which takes in two values
+and returns
+X Plus y
+we expect add 1 and 2 to return what
+three and what would we expect
+zero one two three to return
+six so if we do x dot reduce
+and pass it an ADD
+we get back six
+why is that because first it starts with
+zero
+um and basically it starts by invoking
+the first two arguments so it has zero
+and one invokes adds so zero plus one is
+one it passes one on has the first
+argument
+and Y is the next argument in the or the
+next value in the array so two so we
+have one plus two is three
+and so for the next iteration X is three
+Y is this next value called three it
+returns six and since that's every value
+in the array it returns six
+does that make sense
+so those are the three high order
+functions that we're going to talk about
+and that's actually Implement those
+um
+so in four
+higher order functions
+let's go ahead and declare some high
+order functions of ourselves
+so let's
+let's do does anybody have a preference
+if they want to do map filter or reduce
+let's do map all right so let's declare
+function called map
+and let's take two two arguments first
+is the array that we want to map over
+and the second is some function that we
+want to invoke to every value on the
+array
+so can anybody give me a strategy on how
+we might go about implementing this
+so first we're going to want to create a
+brand new array
+and then at the very end we're going to
+want to return that
+now what do we want to do before we
+return
+yeah so comment wise first we should
+check if the arrays and array and the
+functions of function I completely agree
+but let's let's just assume that for now
+so what so what does map do
+it takes every value in an array runs it
+through some function and returns
+another array
+with the return values
+so who wants to give me a strategy
+yeah so some sort of for Loop that will
+grab that value in the array and apply
+that function cool so we can do four uh
+let's use let I equals zero
+I is less than
+however many values that are on the
+array
+and let's do
+that the value just be array I
+and then what we want to do is
+um
+new array
+push
+a value onto that new array and what do
+we want to push onto it
+the result of running that function
+on that value
+does that make sense
+foreign
+shall we test it so
+we want to map
+over X add 1.
+and we expect to see one two three four
+and we do
+nice
+um
+and so one uh handy built-in function to
+all Rays is this thing called a for each
+Loop so we can actually clean up our
+code by using a for each Loop and so we
+could do the original array.4 each and
+what that does is it's a higher order
+function itself
+that allows us to pass it a function and
+it will invoke that function on each of
+the values so it's basically like map
+but instead of returning a new array
+with those values it just invokes that
+um function on those values without
+taking the return function and putting
+it in an array and so we can say for
+each value here
+we just push
+onto that new array
+the value after we run it through that
+function
+does that make sense
+cool any questions
+on the implementation of map
+any questions on
+functions as first class citizens
+do you think it would help if we
+implemented filter or reduce or are we
+good here
+no okay moving on
+cool so you may have heard these terms
+thrown around when dealing with
+JavaScript things like synchronous oh
+async or asynchronous single threaded
+so what what is Javascript JavaScript is
+actually single threaded synchronous
+language
+um and so since the synchronous a
+function that takes a really long time
+to run will cause a page to become
+unresponsive
+I mean we can actually demonstrate this
+um we can do this right now
+by opening up
+our Dev tools
+and I'm going to actually
+cause this website to stall out so we
+can write a function called hang
+and let's say for some amount of seconds
+and basically what this hang does oops
+let's override that function called hang
+and what it does is we can say cons
+done at
+is some time in the future so date dot
+now which gets us to the current time
+plus however many seconds we want
+times a thousand because data now
+returns milliseconds and so now we have
+some function called or some value
+called done at which is the time that
+we're going to be done we can do while
+um
+date dot now
+is less than
+the time that we're done
+just do nothing
+and so now everything's good
+as you can see we can move back and
+forth in the slide
+but if I did hang for 10 seconds
+we're stuck
+for another 10 seconds until
+the page is done with that while loop
+wow
+does that make sense and this is because
+JavaScript is single threaded and
+synchronous and so since this while loop
+was running for 10 seconds it was just
+doing while this is true don't do
+anything it's just going through that
+while loop it locks up the entire page
+yeah
+um
+I I believe so so the question is if we
+did something like while true would it
+just lock up the page permanently
+I believe so unless the browser protects
+against that and I don't want to try
+because it will take down the
+presentation
+um but as we just demonstrated since
+JavaScript is single threaded and
+synchronous while that while loop was
+happening we couldn't do anything at all
+on that whole website
+um
+which you could take advantage of if you
+wanted to like have some malicious
+website which just does some while loop
+and locks up somebody's computer
+but JavaScript also has some functions
+that act asynchronously
+um
+and so let's take a look at some of
+those functions
+um
+so one of those functions is called set
+timeout and we'll we'll look into it a
+little bit more in detail but let me
+just show you how that works so let's do
+a function called print
+three
+print one
+and what that does is it console logs
+one
+and let's have it print two
+and a print three
+and then if we invoke print one
+print two
+print three
+what would we expect to see
+one two three but say we use this thing
+called set timeout
+which is basically an asynchronous
+function so say rather than printing one
+we did
+set Timeout on print one to be a second
+a thousand milliseconds or did set time
+out
+on print two
+with a timeout of zero seconds
+and then print three
+knowing that knowing nothing about set
+timeout other than it sets some time out
+before running a function
+what do we expect
+to be console logged so what order do we
+expect these to print
+anybody care to guess
+three two one
+why'd you say that
+okay so two three one's the other guest
+so
+let's actually just run this
+and we see three two one even though
+set timeout for print two
+is zero
+so let's let's dive a little bit more
+into how this works we will dive a
+little more into this how this works um
+in a couple more slides but that's just
+a teaser at asynchronous functions
+so how exactly can a can a language be
+both synchronous and asynchronous
+um in order to explain that we have to
+explain these Concepts called execution
+stack browser apis function q and event
+loop I mean so let's dive deeply into
+what an execution stack is so has
+anybody heard the term stack
+or execution stack
+so functions that get invoked by other
+functions get added to this thing called
+a call stack
+um
+and we'll discuss a little bit about
+more what that is in a second
+um
+and when function is complete they're
+removed from the stack and Frames below
+continue executing
+so does anybody or everybody know what a
+stack is
+so stack is one of those data structures
+that you may have seen in cs50
+and the example that we get for a stack
+is something like a deck of cards or a
+stack of lunch trays where when you add
+things to the stack they appear on the
+top and so when you want to grab the
+next thing whatever you grab first is
+the most recent thing that you've put
+onto this stack so if you imagine a deck
+of cards say you have cards called 54321
+and you place five four three two and
+one on the stack
+the first thing that you get back is one
+and then two three four and five
+as opposed to something like a queue
+where it's like a line of people where
+the first person in the line is the
+first person who comes out
+um
+and so let's explore what Stacks are
+um actually I'll show you in code first
+and then I'll draw it
+so say we had a function called a
+that just does console.log
+hi
+a function called B
+that just calls a
+and a function called C
+that just calls B
+and then we invoked C
+so can everybody imagine in their head
+exactly what's going to happen
+so C is going to get invoked which calls
+B
+B is going to get invoked with charge a
+and a is going to control log High
+and so as you can imagine
+um
+the the JavaScript interpreter knows
+exactly
+um where which function gets added next
+actually that's a better example would
+be something like
+we can use our add
+one function from above from earlier
+all right here's a little bit of a
+better example
+so when we invoke c c isn't going to
+console log get num plus get num and so
+what is the value of get known
+so when you first invoke when you invoke
+the first get numb it returns add one of
+ten
+and so it calls add one passes in ten
+add one returns that original number
+plus one so it returns eleven
+which returns to here which gets
+returned to here and so somehow
+JavaScript has to know that
+11
+is what get numb
+evaluates two and then it does it again
+and so as you expect this would return a
+number called or console.log a number
+called 22 but let's actually go through
+exactly how that works in drawing
+so we have a function called adnumb or
+add one
+which expects some num
+we have a function called get num
+and we have a function called C
+and what C does is it gets two nums and
+adds them and what add one does is it or
+get what get num does is it gets
+um the value of add one add one of ten
+um and returns it and so imagine we have
+this mythical call stack
+which is basically the way that
+JavaScript knows what's going on and so
+first we invoke C and so C
+gets added onto this stack and so it's
+basically JavaScript remembering like oh
+he called the C function and what does
+the C function does well it returns get
+num plus get num and so in order to find
+out what get num is for the first time
+we have to add
+getting them
+we have to evaluate that
+and so what is the value of getting num
+well we have to figure out what add 1 of
+10 is and so we need to
+evaluate that and so JavaScript now
+knows and it's keeping track that we
+have to evaluate this thing called add
+one
+and once we get it it gets passed to
+this thing called get numb and once we
+have that value it gets passed to C and
+so this returns 10 or 11. so it returns
+11.
+to get num 11 just returns that to C
+and then what happens in C well it needs
+to find get none plus get num so it adds
+it has to evaluate getting them again so
+get numb gets added to that stack
+and how does get num evaluate well it
+needs to evaluate get one or add one
+and so that evaluates
+and after it evaluates it just
+gets erased from that stack because it's
+done
+and then when get num evaluates that
+also gets erased from the stack
+and then C console logs 22
+and then C
+gets erased from the stack because that
+has finished executing does that make
+sense to everyone
+yeah
+totally get erased like if one of the
+stats creates a closure and
+so the question is what happens if one
+of those functions creates a closure
+does it still disappear from the stack
+um
+the answer is yes with an asterisk so as
+long as nothing else needs to remember
+all of those variables in stack so if
+there's no if these functions don't
+create other closures then they'll just
+be erased um
+and you can just you can think of it as
+being erased from memory
+um
+because that's really something that the
+engine itself handles and you really
+don't have to worry about memory and
+stuff but you can just think of it as it
+just gets erased from the stacking from
+memory if no closure is left around
+but great question any other questions
+does this call stack make sense to
+everybody
+great
+and so a quick demo of
+um just showing that JavaScript does
+indeed keep track of this call stack is
+what happens if an error is found
+so if one of these functions ends up
+creating an error in this case add one
+and we run this
+it says Ono and error which is the error
+that we created and it says at add one
+which was called by get num which is
+called by C
+and so JavaScript does indeed keep track
+of this call stack and you can see when
+an error gets thrown it basically dumps
+the cult stack to
+the console
+does that make sense to everybody
+any questions on call stack execution
+stack
+great and so now going back to
+asynchronous JavaScript so how exactly
+does This Thing Called set timeout work
+how does it not just immediately get
+invoked how does any asynchronous things
+work and in order to understand that you
+first need to understand execution stack
+and then I can talk you through exactly
+how things get handled in terms of
+browser apis function q and event Loop
+um
+so let's go ahead and draw that on the
+board as well
+so this thing here we can call the stack
+and this is basically exactly the same
+stack that we were talking about before
+over here
+we can call this apis
+um basically these are functions that
+you can call that are not directly built
+into JavaScript
+um but might get run
+in the browser
+we have this thing we can draw down here
+called the function Q
+and we have this thing called the event
+Loop
+so basically we talked in depth about
+how that stack worked
+but we have not mentioned apis event
+Loop or function Q so basically what
+apis are are these things like set
+timeout or fetch or any of these other
+asynchronous functions which get run and
+handled by the browser but not
+necessarily by JavaScript itself and so
+say we had something does everybody
+remember the example from before with
+the Cons with print one two and three
+let me remind you of the code real quick
+so we have print one print two and print
+three are three functions that we Define
+and we set timeout print one to one
+second set timeout print two to zero
+seconds and then print three immediately
+and so when this when this file gets
+executed
+three things happen
+first we call
+print one
+but set timeout
+for one second
+then we do the same thing with print two
+for zero seconds and then we call print
+three
+and so basically
+um print what set timeout of print one
+for one thousand seconds gets tossed on
+the stack here
+and set timeout is actually one of those
+asynchronous functions that gets handled
+by the browser and so that gets tossed
+over here
+and so that's
+print one
+in one second
+and so the browser actually is the thing
+that handles keeping track of the
+seconds until print one should get
+executed and then the function Q says
+okay I executed that line of code I'm
+done next is set timeout of print two
+for zero seconds which gets thrown on
+here that gets evaluated and that's
+handled by the browser as well since
+it's a set timeout call
+and so this
+gets print
+two
+with a timeout of zero seconds
+and then the next line of code in the
+file was print three which immediately
+gets tossed on the Queue or on the stack
+and it console.logs three and so
+three gets console.logged
+and then the state of the world is
+basically this because all this happened
+in
+very very quickly
+is everybody with me so far
+and so now the browser says hey it's
+been zero seconds
+week it's time to call print two and so
+this
+gets put in the function q and so as we
+alluded to earlier a queue is basically
+a line where the first things that get
+added are the first things that come out
+and so it says print two
+is ready
+and that gets erased from here
+and so now the state of the world is
+this there's nothing on the stack
+because that file has finished executing
+it it did set timeout of print one one
+second it did set time out of print two
+for zero seconds and then did Set uh it
+just did print three which immediately
+console log three
+and so now the state of the world is
+this there's nothing on the stack
+there's one thing in the function queue
+and there's one thing over there uh
+called print one and the browser's
+keeping track of the time
+and so there's this thing called the
+event Loop which is constantly checking
+first is there anything on the stack if
+there's something in the stack just keep
+doing what you're doing finish the stack
+but once the stack is emptied it says
+hey is there anything in the queue
+that's ready to go onto the stack and
+now there is the stack is empty and
+there's something on the Queue and so
+the event Loop says hey let's move this
+into the stack
+and so the event Loop
+takes care of moving print two
+onto the stack and erases it from the
+queue
+so now the state of the world is this
+there's something on the stack called
+print2 function queue is empty and the
+browser is still keeping track of when
+it should print one and this is
+basically still a thousand milliseconds
+and so now let's get what happens
+since there's something on the stack
+that always gets to the highest priority
+since we know JavaScript is synchronous
+it's just going to execute everything on
+the stack before you've been looking
+anywhere else and so since there's
+something on the stack called print2 it
+executes that was it do it prints out
+too
+and then it says okay
+I am now done with the stack
+and so now this is the state of the
+world
+there's something over there being
+tracked by the browser called print one
+it still has a thousand milliseconds or
+so on the clock there's nothing in the
+stack and there's nothing in the queue
+in the event Loop is saying oh
+there's nothing for me to do
+so now what happens
+well basically nothing first whole
+second
+so basically if this timer runs down and
+as soon as this hit zero can somebody
+tell me what happens
+yeah so print one moves to the queue so
+as soon as this hit zero this gets moved
+down to here so now we have print one
+this gets erased
+and now what happens
+exactly the event Loop says Hey the
+Stack's empty but there's something on
+the Queue so let me move that up to the
+queue
+or the stack I mean move the thing from
+the stack from the queue to the stack
+and so now print one is here
+just erased
+from the queue
+and then what happens
+print one
+and then
+the stack is cleared
+and now we're done there's nothing left
+being tracked by the apis there's
+nothing left in the stack and there's
+nothing in the queue
+and so what happens at the very end
+where we print three two one
+does that make sense to everybody
+yeah
+whereas everything that's on the
+function here everything that's sorry in
+the execution stack executes in the
+order in which it could appeared there
+uh yes exactly so the question was about
+ordering and does how is order affected
+when things are on the stack q and in
+the apis over there and the answer is
+exactly as you said everything in the
+stack has a definite order things at the
+top get executed before things on the
+bottom and same things you have to queue
+things get queued up and as soon as the
+stack is empty whatever is next in the
+queue is guaranteed to be the next thing
+on the stack
+and if that thing calls other functions
+the stack will grow and Shrink before
+even grabbing another function from the
+queue and then things in the apis over
+here these
+um you have no real guarantees on what
+order they're going to return and so
+that's what the asynchronous or the
+concurrency of model of JavaScript is is
+basically these apis are handled by the
+browser and they will let the
+um basically let the rest of the
+JavaScript know when they're done by
+pushing things onto that function queue
+and then as soon as they're on the
+function queue then you have a
+guaranteed order when they're going to
+get put onto the stack
+does that make sense
+for the same amount of time
+is there like guaranteeing order
+so question is if you set timeout three
+different things is there a guarantee in
+order
+um I believe so
+if you do set timeout
+um
+uh print one zero sent time out with
+print two zero set timeout of print
+three zero I believe you're guaranteed
+to print out uh
+one two three but the caveat is that
+depends on the implementation of the API
+so it really depends on the browser
+you're using but I believe browsers will
+have that guarantee
+any other questions
+yeah
+so like that's just like whenever it
+runs out that's fine
+exactly so what the event Loop does is
+it basically checks when the stack is
+empty
+it moves something from the queue to the
+stack
+um and that's all it does is it's just
+constantly checking hey is the stack
+empty if not then I'll I'll wait is the
+stack empty oh now it is is there
+anything on the Queue oh there is so let
+me move it to the stack
+yeah is there a limit
+to the queue
+um
+is there a realistic limit to the queue
+no uh the limit to the queue is
+basically what can be held in memory
+and so what happens if we run out of
+memory that's let's let's have an
+example that does that
+um so this won't actually overflow the
+queue but this one will overflow the
+stack
+um so say we have a function called
+recurse and recurse
+that's console.log
+recursion
+and then
+um
+return recurse
+so what do we expect to happen here
+yeah so we so recursed is going to
+console log recursion and then return
+the return value of recurs what's the
+return value of recurs well it recurs is
+return value and so we're going to keep
+going down that rabbit hole until we run
+out of Stack
+so if we run this
+Up Maximum call size exceeded because
+if we scroll
+I'm actually scrolling
+there are a lot of these
+um
+a lot of them
+so that's what happens when we run out
+of Stack size
+cool any questions about the
+asynchronous JavaScript
+so what are some examples of
+asynchronous functions in JavaScript
+well we saw a set timeout I alluded to
+this thing called Fetch which is our the
+way of fetching
+Network requests jQuery if you've ever
+used it it has a lot of asynchronous
+functions for fetching things like Ajax
+XML HTTP requests which is built into
+the browsers for fetching things things
+like database calls anything anything
+really that relies on something other
+than the JavaScript is going to be
+asynchronous
+cool so what happens if we want
+something say we have some asynchronous
+call and we want to do something with
+the return value of that call
+how might we do that
+well we could just wait for it to come
+back but that wouldn't be really great
+would it if say we have some website
+which is
+uh what's shown is relying on some
+database call we don't want to like lock
+up the entire website until that
+database call comes back right that
+wouldn't be very good for the user the
+analogy there would be say you want to
+hang out with your friend and you call
+them and you say hey let's hang out and
+he says oh I'm at work I'll be done in
+five hours you don't say okay and then
+just sit there for five hours right you
+go ahead and do other stuff and then
+five hours later you say oh my friend's
+done with work now let's go do something
+and so that's exactly how javascript's
+concurrency model or asynchronous model
+works is this thing called callbacks
+um callbacks are the way that you
+control flow with asynchronous calls or
+another word you execute some function
+as soon as some asynchronous call
+returns a value
+and what that means is the program
+doesn't have to Halt and wait for that
+values you don't just sit there until
+your friend's done with work you go do
+other stuff and when he's done then you
+say okay now let's go hang out or
+something
+does that make sense
+so let's see want to see this in action
+[Music]
+um
+so
+let's have this function
+which takes a callback
+well first let's just do something
+um and then
+sell function do something takes a call
+back
+and console log is the result of
+invoking that callback on one so what
+what type is that callback
+it must be a function right if it's
+getting invoked and so do something is
+basically a function a higher order
+function like we discussed earlier which
+takes as an argument
+some function and will invoke it with
+one so say we did do something
+um
+it's not even console log let's just
+invoke it
+and we passed in to do something
+console.log
+what would happen
+well we passed in this function called
+console.log to do something and then
+at line two we invoke console.log with
+one and so we expect this to console log
+one
+but say do something was actually an
+asynchronous call say rather than
+invoking the Callback on one immediately
+it did set timeout
+for some number of time
+one second
+and set timeout takes a function that
+immediately invokes so we'll just create
+an anonymous function that invokes
+callback on one in one second
+now it's not do sampling but rather it's
+do something async
+now what do we expect to happen well
+oops
+one second later at consulate one and so
+this is an example of a callback
+so we have some function that does
+something asynchronously in this case it
+invokes it returns one basically a
+second later I mean how do we how do we
+control uh what we're going to do with
+that value as soon as it returns well we
+just pass in a function that says hey
+we know that this this asynchronous
+function is going to return some value
+eventually and so let's just pass it a
+function to handle what we're going to
+do with that value and so
+um with to say something async what
+we're doing is we're passing in a
+function called console.log and what we
+do is we console.log the return value of
+the async function whenever it decides
+to return and so for things like Network
+requests where we don't know exactly how
+long it's going to return
+what we do is we pass in a function that
+handles the eventual return value and so
+as soon as that Network request comes
+back then we have the function that will
+say oh I know what I'm supposed to do
+with that Network request let me do it
+does that make does that pattern make
+sense
+any questions on callbacks
+great
+um let's look at an example with
+callbacks
+um a real life example taken from some
+code that I've actually written
+so from personal project of mine I have
+this function called login and what
+login does is it has a whole bunch of
+asynchronous functions so login takes a
+request and a result and some callback
+and so what we're doing basically is
+we're looking for the user by their
+email
+this is an asynchronous function
+and we're passing in a callback with it
+and this callback takes in an error if
+an error occurs and the user if the user
+exists and if there's an error we return
+this original callback it says hey
+there's an error let me handle it like
+that
+otherwise there's a user that came back
+and so let's do this user.compare
+password which is asynchronous and so we
+need to pass in a callback function with
+that and that callback function is here
+so either there's an error or it matches
+if it matches if there's an error handle
+that error there's not a match say oh
+incorrect password otherwise create this
+token and then sign that token which is
+another asynchronous function uh it
+takes a callback which expects an error
+and a token if there's an error we
+handle that error otherwise we handle
+that token save that user which is
+another asynchronous function and so the
+Callback takes the error
+if there's an error handle it otherwise
+return and now we're way nested into
+this what is known with it as a
+technical term callback hell basically
+callback
+with a callback with a callback with a
+callback
+and another callback
+and so that there is called callback
+hell we see this thing called that kind
+of looks like a Christmas tree
+um if you've ever seen there's some
+pictures online of callback hell where
+it's like 10 20 iterations deep and you
+see basically this Christmas tree of
+code
+um and that there is the downside of
+callbacks within callbacks I mean we're
+going to take a short break now and
+after the break we'll look at some ways
+of combating this callback Hill
+all right welcome back uh before the
+break we were showing
+um this function that I wrote on a
+personal project of mine demonstrating
+this thing that we called callback Hill
+that is
+callbacks within callbacks within
+callbacks recursively which gets a
+little bit messy and hard to read and I
+alluded to this thing that we could use
+to alleviate callback Hill
+which is promises so who here has heard
+of a promise before
+who here has heard of a promise in real
+life before hopefully everybody so
+what's a promise in real life
+it's basically you telling somebody that
+you're going to do something eventually
+and they can just have your word that
+you're going to do it eventually right
+and so that kind of seems like the
+asynchronous model of JavaScript whereby
+you basically get a some sort of promise
+that something's eventually going to
+happen I mean so
+JavaScript also has this object called a
+promise capital P whereby you can
+alleviate callback Hell by writing code
+that assumes that a value is going to be
+returned eventually with the success
+function
+and a big upside about promises is that
+you only need a single error Handler and
+so we saw with the callbacks example
+over here we see line 15 if there's an
+error returning this if line a if
+there's an error handle it line five if
+there's an error handle it line 19 if
+there's an error handle it and with
+promises what we have a big advantage of
+promises is that we don't have to handle
+the error within every single callback
+we can just do it once and be done and
+so let's go ahead
+and let me show you how promises work
+so say we have some function that
+returns a promise one of those functions
+is called Fetch and we'll talk about
+fetch in depth in a few weeks
+but just take my word for now that fetch
+returns a promise so you could do
+something like
+um
+fetch some URL
+and then we know that fetch returns a
+promise and eventually it's going to
+return to us this URL and so we can
+start to do is write a function that
+expects that you are that
+um
+the response to come back and start
+handling it already and the way we do
+this with a promise is this thing called
+dot then which takes a callback itself
+so we could have a callback
+that takes the response and does
+something with it
+if we wanted to then handle that later
+we can chain a DOT then
+that takes whatever some Json Maybe
+and does something with that
+and maybe if we want to do something
+with that Json later we can dot then
+again
+do something with that
+so on and we can just keep chaining
+these lens as long as we want and so
+this is basically the same as putting a
+callback within a callback within a
+callback but as you see
+we don't keep creating this Christmas
+tree of callbacks rather we just chain a
+new DOT then
+and we don't actually have to worry
+about handling an error here
+instead what we can do is a DOT catch
+and this catch function down here will
+actually handle any errors that get
+thrown in any of the preceding then
+statements
+and so we could handle the error here
+and we would not actually have to do it
+in any of the then statements over here
+and so something that you might see
+we'll discuss this in later lectures but
+you might see something like return res
+dot Json
+which is
+um
+basically saying extract the Json out of
+this result and here we might doing
+something like
+return
+only the important parts of the data
+maybe so we could do like important
+data is Json Dot
+important
+and so on and maybe down here we
+eventually wanted to just conflate log
+it
+and so this would be an example of using
+a promise rather than using callbacks
+within callbacks within callbacks
+and so let's actually refactor my old
+authentication code to use these
+promises
+so here we have a bunch of callbacks
+and one thing that we know is that we
+don't actually have to handle any of the
+errors so first thing that we do is
+we're going to do user gotta find one
+so basically this
+and so before let me show you before and
+after
+before we had this function called
+user.find1 which takes in basically the
+query that we're looking for as long as
+well as the Callback function
+but rather than passing in a callback
+function we can actually since this does
+return a promise we can do a DOT then
+that
+has a callback function which expects a
+user
+and so we've started to start refactor
+line five here so rather than passing a
+callback function that takes an error in
+the user
+we just do a DOT then that handles the
+user and how do we handle the error
+where we just have a DOT catch
+dot error
+and what have we been doing with that
+well if there's an error we just return
+callback error
+so we can do that in the catch block
+there and now we're done handling errors
+for the rest of the promise
+and so we can get rid of 111 you can get
+rid of line 17 and we can get rid of
+line 20.
+and now we can get rid of line 10 since
+we already refactored it out
+then what do we do with that user well
+you can cut and paste that into there
+so we want to compare the password and
+compare password takes in a password as
+well as a callback and so let's go ahead
+and return that
+and then handle that callback with
+another then instead and so rather than
+having a callback that expects an error
+and it is matched
+we can just
+only handle that as match case
+and so what do we do if there's not a
+match
+then we want to tell them there's
+incorrect password in return
+otherwise
+we want to take what the payload is and
+return this new jot sign promise
+so let's do this copy and paste this
+get rid of that callback which expects
+an error and a token and instead return
+that
+and handle that in another then
+expect
+the expected token
+and what do we do we do this
+and user.save it looks like it takes
+another callback which is only looking
+for the error so you could return
+user.save
+and then finally
+do that
+and then we get to get rid of all these
+closing curly brackets
+and that there is our new
+login function with promises rather than
+callbacks
+did that refactor make sense to
+everybody
+and does This Promise structure look
+nicer than
+the Callback structure
+this is something we're going to go into
+a lot more depth in when we talk about
+data it's in a few weeks but do promises
+and general make sense to people
+yeah
+uh-huh
+um
+so yeah the question is how does the
+catch function know when to get invoked
+basically and basically this is all so
+user.find1.then.then.then.thecatch is
+all one big
+basically promise handling chain and
+Promises which are built in know exactly
+what to do when an error is found so if
+an error is found it'll just March down
+that chain until it finds a catch
+statement and then it'll invoke that
+callback with that error object
+but that's not the propagation
+I mean it stops future then it's from
+happening
+any questions on promises again we'll
+dive more deeply into them
+in coming weeks yeah
+um so the question is what's the
+trade-off between callbacks and promises
+and what
+if anything do we lose when using
+promises over callbacks
+um the answer is not really much most
+things are are migrating from the
+callbacks of the past to now promises
+but promises were something that were
+introduced fairly recently to JavaScript
+which is the reason that callbacks still
+exist a lot in Legacy code
+and so what is the future
+um so right now uh
+promises are very popular
+but there's a new way of handling AC
+finished things that's coming in the
+future
+um so there's this thing called async
+await which is actually introduced in
+es2017 which is the next
+next maybe so es6 so es2017 has been
+finalized but it's still not adopted by
+everything
+um but async away is included in that
+es2017 spec and it allows people to
+write async code as if it were actually
+synchronous
+um
+and so we're not going to dive too
+deeply into this but I thought I could
+just show you quickly a refactor of what
+we've done so far to use this async away
+rather than the promise syntax
+so right now I'll log in
+um
+is a big promise chain
+and if we refactored it using this new
+async await syntax we can actually make
+it look very synchronous so
+first thing that we need to do is add an
+async keyword to the function which is
+letting the JavaScript interpreter know
+hey this function is async which means
+handle it appropriately which basically
+what it does it allows us to use this
+other keyword called await which will
+functionally just wait for Value to come
+back before continuing the code but it
+does this asynchronously behind the hood
+um so basically what what
+user.find1. then functionuser is doing
+is it's waiting for user.find when to
+return with some value which is going to
+be that user and so if we are writing
+synchronous code we might do something
+like const user equals the value of
+user.find1
+and if we were using async awaits syntax
+we could basically do that by saying
+cons user is user.find1 but we know that
+user dot find one is actually an
+asynchronous function so we actually
+have to just wait for that
+response to come back and so if we use
+that await keyword it's basically saying
+hey wait for that result to come back
+but don't actually just like stop and
+wait
+just wait behind the scenes
+asynchronously
+and so then what might we want to do
+well then next we want to do
+user.compare password which gives us
+this thing called is match and so if
+we're doing this synchronously we might
+do something like const is match
+equals await
+user dot compare password
+body that password
+then this is basically a synchronous
+code right we can do
+if it's a match
+do this and return
+otherwise
+create this payload
+and then sign that jot which will give
+us a token back
+but since this is an asynchronous
+function we have to use that await
+keyword
+then what now we have the token so let's
+do these things
+and rather than returning user.save
+which is what we would do in a promise
+well we just want to make sure that
+succeeded so we can do const success
+equals that and as long as that works
+then we can go ahead and do res dot Json
+with that token
+and now we're basically done
+what's one thing that we haven't
+handled
+the case where one of these things
+errors and so we haven't talked about
+this before but JavaScript actually has
+this thing called try catch which allows
+us to try to do some code and if an
+error happens
+intercept that error and handle it up in
+code rather than delegating to the
+browser's error handling and so we can
+do is we can actually wrap all of this
+logic in a try lock
+and catch any errors
+and handle those appropriately which is
+basically by invoking the Callback
+that's passed into this login function
+with the error
+we're done with error handling and we
+can just
+style this appropriately
+and so now with this new async await
+syntax we can write async functions in a
+more synchronous manner but everything
+behind the hoods is still running
+asynchronously
+oops
+one thing we forgot to do is await this
+value
+any questions on this syntax again this
+is something that will dive more deeply
+into as soon as we get into actual data
+handling in the future
+as a random poll
+who prefers callbacks over
+everything we've seen today
+who prefers promises
+and he prefers async await
+about 50 50 actually
+cool no dude and people online do just
+drop something and slack and I will take
+your votes into account
+cool so let's pivot a little bit from
+asynchronous actions and talk about this
+and by this I literally mean this
+so who here has seen this keyword called
+this in JavaScript before
+here seeing this in other languages
+so this in JavaScript is slightly
+different than other languages
+um sometimes in confusing manners but
+hopefully by the end of this lecture it
+will not be confusing
+so this basically refers to an object
+that's set at the creation of a new
+execution context or in other words a
+function invocation or in other words
+another stack frame on that stack that
+we drew earlier today
+um and in the global execution contest
+or basically
+the window console or the node reple or
+the function that gets invoked in node
+it refers to a global object
+um
+and if a function is called as a method
+of an object or in other words a method
+is basically a term for
+um
+a key value pair and an object where the
+value is a function that key is
+considered a method so if a function is
+called as a method of an object this is
+bound to that object that that function
+is called on
+so what the heck does that mean well
+um
+so let's just demonstrate in node if we
+just type this
+we get back that big global object
+in
+the console browser console if we type
+this we get back that window so as we
+discussed last week we saw that window
+was the indeed the global object in the
+scope of the browser console
+and how how might we
+um
+write something such that this gets
+bound to other objects
+so let's write
+12
+this
+cool and so I mentioned that if a
+function is called as a method of an
+object this the keyword this gets bound
+to the method that the
+um function is called on or the object
+that the method is called on so let's
+just create some objects so let's do
+const person
+is somebody with a name
+and let's have a function called greet
+so on line three I'm using this thing
+called this dot name
+and this and this is part of a function
+which is defined as a method on this
+object remember a method is just a key
+where the value is a function and so in
+this case person.greet is considered a
+method because greet is this function
+and so if we call person.greet
+this gets bound to person
+and so this.name becomes the value of of
+person.name which in this case is Jordan
+so if we were to run this
+we see Jordan gets
+printed uh let's make this more of a
+greet by doing hello
+then we see
+hello Jordan
+but what happens if we wanted to do
+something like
+um
+this
+what might we expect to happen in this
+case
+so we declare this global global cons
+called greet Global meaning it's outside
+the other object
+and we set it equal to person.greet and
+so basically greet right now is a
+function that conscious.logs hello this
+dot name
+so what is this in that case
+so first we have to find where is this
+function getting invoked
+that's at line 10 right
+it gets defined at line H but it gets
+invoked at line 10.
+and so what is the value of this
+here
+yeah it's a global object
+and so what is the value of this.name
+so
+yeah name is not actually a key on that
+global object and so if we try to
+dereference a key that doesn't exist on
+an object we get undefined and so if we
+do this
+we're gonna get hello undefined
+does that make sense
+but what if we were to create some other
+object
+called
+student
+let's call it friend
+I mean a friend has a different name
+but their name is David
+and now how if we did something like
+friend
+dot greet
+equals person.greet
+so now what do we expect to happen so
+where does greet
+in this case get invoked
+line 14
+and what is it getting invoked on
+right now it's a method of another
+object right and so what object is that
+well that's friend
+and so what does this get bound to
+gives bound to friend and so what is
+friend.name
+in this case it should be David so let's
+try running this
+let me get hello David
+does that make sense
+so now yeah
+so is this should it be thought of as
+just a useful shortcut or
+um so question is
+for the camera is this should it be
+thought of as some sort of useful
+shortcut
+um
+in a way yes it's a way of declaring of
+of using a variable and we don't yet
+know exactly where that variable is
+going to be bound to because in in the
+case of person we know that this.name is
+going to be equal to that person but
+that's not always the case right as we
+saw if we take this greet method on
+person and assign it to friend
+this dot name is not person.name in that
+case it's going to be friend.name and so
+it's kind of a way of using a value that
+we don't are we don't yet know what it's
+going to be and until we go ahead and
+invoke that function
+um and when we start handling events and
+stuff in react and stuff like that we
+will see or even react components and
+stuff like that which is uh coming in
+the next lecture we'll start to see
+exactly why this the keyword called This
+is useful
+cool and now let's let's do a challenge
+together let's try to get line 18
+to greet somebody how might we go about
+doing that
+so what what does this greet function do
+discrete function
+just does constant.log hello
+to this dot name
+and so we need to figure out some sort
+of way that when line 18 gets invoked
+that this dot name is bound to some some
+variable that we want
+so how are there are a few different
+ways to do this
+um let's see if we can figure one out
+together
+yeah one way is we could put the name
+property on the global object so we
+could do something like
+do you think it matters whether I do
+online 15 17 line one
+where where should I put this
+yeah so the answer is yeah it does it
+doesn't matter where I declare this
+because as long as it happens before
+line 18 this.name will exist so I could
+do something like this dot name
+equals
+Johan
+who is one of our teaching assistants
+and line 20 would now say
+hello Johan
+um actually there's a small caveat here
+the way that node evaluates files
+um
+it actually won't work if we just invoke
+this by doing node 12.
+it's going to still going to be
+undefined there that's just I'm going to
+wave my hand for now it's the way that
+node handles
+um invoking files under the hood but if
+we actually did this
+in the node
+um console right here if we did
+const person equals
+name
+agree to the function
+just console logs high
+so if I did person.greet here
+we see how Jordan has expected and now
+if we did something like
+concrete equals greet
+we call greet there we see high
+undefined as expected and now if we did
+something like this
+dot name equals Johan
+now if we did greet
+we see Higher One as expected
+why well because if we do this
+we see that
+this
+has a key called name which is equal to
+your one
+does that make sense to everybody
+again I'm going to wave my hand at the
+why this doesn't work in the node
+execute uh
+a file but it does indeed work if we
+tried to do it in the node Rebel or if
+we want to do it in the browser console
+it would also work
+cool so I mentioned that there are other
+ways of setting this manually and there
+actually are
+so there's these functions called bind
+call and apply and all of these take at
+least one argument where the first
+argument is explicitly what you want to
+set this to be
+and so
+if we were to go back into that example
+and here we wanted to do
+if we deleted this
+and we did consecrate equals
+person.greet dot explicitly bind
+we can Define some any object that we
+want here and that's what will get bound
+to the this in this particular function
+so if we did bind it to some object
+where the name is
+this is a bound object
+then if we ran this
+we would say hello this is a bound
+object because we explicitly bound the
+this
+in this particular function
+to be this particular object
+does that make sense
+and the difference between bind and call
+and apply is that call and apply rather
+than returning a new function function
+because
+person.greet.bind returns a new function
+where the this is automatically bound
+call and apply will immediately invoke
+that function so rather than doing
+consecrate equals that if we wanted to
+use color apply we would do just person
+dot greet dot call
+and then pass in something there and
+same thing with apply
+that makes sense so say we wanted to do
+this
+we would see all three of those got
+bound the difference between call
+um
+buy and call and apply is that bind
+returns a new function called which we
+store and greet and invoke later and
+call and apply just immediately invoke
+that
+does that make sense
+so one other way to set this manually is
+by using es6 arrow notation so es6 arrow
+notation will actually bind this to be
+whatever this is at the time that we
+declare the function rather than at the
+time that we invoke the function
+and so if we did
+um
+cons person const
+new person
+is somebody with a name
+and greet
+is this new arrow notation
+which we'll talk about or show many more
+examples of in the days to come
+and did console.log
+this dot name
+if we did new person
+.greet
+here
+we see what is
+what is this dot name at the time that
+we actually write
+this here
+what is the value of this
+again this is a weird node thing if we
+did it in the
+in the command line if we did const new
+person
+equals name
+new person
+is undefined and why is it undefined
+what is this at the time as I was typing
+this
+it's the global object and what is this
+not name
+is undefined
+and so es6 the arrow notation will
+actually bind this to be whatever the
+value is at the time of writing
+any questions on this
+cool so now let's talk about something
+that will be important in the assignment
+so browsers in the Dom so how so how how
+many people have heard of the Dom before
+most people it stands for document
+object model and it's basically this
+tree-like structure that the browser
+maintains in order to be in sync with
+what the HTML of the page declares and
+so
+say we had some very simple HTML file
+which was just something like HTML it
+had a head with a title it had a body
+with H1 and a paragraph
+this can be expressed in sort of a
+tree-like model right we have the
+document
+we have inside the document we have some
+HTML
+what's inside the HTML well we have a
+head and we have a body what's inside
+the head well we have a title what's
+inside the title where it's some text
+called This is a simple page
+what about the body well we have H1 we
+have a paragraph
+and what's inside those some text as
+well and so we can sort of describe that
+as a tree right we have at the very top
+document
+and below that we have some HTML
+then what was inside the HTML
+we had a head and a body right so head
+and a body
+and what was inside the head and the
+body
+well the head had a title the body had a
+couple other tags H1 and a paragraph
+and so we can sort of describe those
+also as part of the tree right so head
+there's a title
+body had an H1
+in a paragraph
+and those each had some text
+and so do you see how that HTML maps on
+to some tree-like structure that we can
+maintain
+so this tree-like structure is called
+the Dom or the document object model
+and it's a way of modeling the HTML that
+is rendered onto a web page
+does that make sense to everybody
+and so why does that matter
+well we can actually modify that Dom
+using some JavaScript I mean as we'll
+discuss in checks section this week
+we'll discuss exactly how you might do
+that
+and that is exactly what
+the first project is going to be
+covering
+so in the first project which will be
+released today
+you will create a to-do app and so this
+to do app will basically be a way of
+tracking some to-do's that you'll have
+to do
+um and you'll use JavaScript and
+manipulation in order to create and
+track however many to Do's you need to
+to check off
+um
+there'll be specifics coming out via
+email
+but this assignment will be due in a
+couple weeks and sections will also be
+starting this week
+um you should have gotten email before
+class today with a forum about a couple
+sectioning times and if those work for
+you
+and those sections will be starting this
+week and in sections sections are
+basically uh one and a half hour one to
+one and a half hour block where led by
+one of our Tas Johan or raylen we'll be
+talking about smaller stuff that we
+didn't quite cover in lecture one of
+these topics will be Dom and
+manipulating the Dom using JavaScript
+and so this week uh they'll be talking
+to you about that answering any
+questions that you may have and then
+preparing you for this first project
+all right let's call it for tonight and
+I'll Stick Around for some questions if
+you have any after

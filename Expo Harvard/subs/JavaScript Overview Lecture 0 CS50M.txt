@@ -1,0 +1,1913 @@
+thank you
+[Music]
+all right welcome everyone to mobile
+active development with react native my
+name is David Malin and this year is
+Jordan Hayashi and the this is a course
+that assumes as background only
+something like cs50 which is Harvard's
+introduction to computer science but
+more generally if you haven't taken that
+particular course
+um prior programming experience in most
+any language should suffice the focus of
+this class of course is going to be on
+mobile app development and the
+interesting thing about this space is
+that it's been changing pretty rapidly
+it wasn't all that long ago where none
+of us actually had smartphones in our
+pockets and so the landscape has been
+changing particularly quickly and it's
+getting better and better if you've done
+any app development on mobile devices or
+any web development on mobile devices
+early on we pretty much just had like
+HTML and CSS maybe some JavaScript for
+interactivity then lots of libraries
+came onto the scenes that kind of via
+CSS and JavaScript gave the appearance
+that you had a mobile-like application
+on your phone but the user interface
+wasn't all that good and you could tell
+that this isn't really native that is
+code that's written in Objective C or
+Swift on iOS us or in Java for Android
+and something always kind of felt a bit
+off and so you could learn any one of
+those languages or pick up the various
+toolkits that exist to write native
+software but it's a decent learning
+curve and if you're running a company or
+writing an app you had to generally pick
+and choose do I want to Target Android
+do I want to do iOS or do I essentially
+want to do twice as much work and so
+that alone could be a potential hurdle
+and then there were these other
+libraries that allowed you to sort of
+approximate the experience of writing
+your code once and then run it on both
+platforms but there too you could always
+kind of tell that something wasn't quite
+natural for the particular device and
+then more recently has come on to the
+seam a number of a number of new
+Frameworks particularly react native and
+open source framework popularized by
+Facebook that really actually now
+enables truly native cross-platform
+development while using JavaScript to
+rather Stitch things together and then
+leaning on the framework to provide you
+with those truly native user interface
+widgets and other features that you
+would come to expect from those various
+languages so what we'll do over the
+course of this semester is really dive
+in deeply to mobile app development
+specifically building on top of this
+popular framework you might have heard
+of react native or react in the context
+of web browsers which has been around
+for some time as well and so a lot of
+those paradigms that folks have been
+using for a few years now on laptops and
+desktops is now available with
+additional features in a mobile context
+especially so today we're going to dive
+in quite quickly to JavaScript itself if
+you have a bit of background in that
+that's great we'll hopefully fill in
+some gaps along the way and we'll also
+look at some of the more advanced
+features both tonight and next week as
+well particularly es6 or script 6 which
+is essentially the latest version of
+JavaScript and with it some new
+syntactic features and programmatic
+capabilities a week after that we'll
+take a look at react itself in jsx which
+rather co-mingles code with XML or a
+markup language if you're familiar and
+then look at some of the particular
+features and UI features that you get
+with a framework like react.js
+components props how you deal with
+States how you can actually stylize
+things get user input and create views
+if you're familiar with paired times
+like MVC model view controller review
+governs what it is the user is seeing
+and interacting with we'll take a look
+at debugging techniques particularly for
+a mobile platform which might not
+necessarily be obvious if the device
+you're working on is here and the device
+you're testing on is here will give you
+some tools and techniques for that
+focusing ultimately on data and
+navigation how you can actually get
+users around in your applications and
+then looking at a popular third-party
+tool and framework called Expo which
+actually makes it even easier to develop
+for this particular environment and get
+started and get work done quickly
+looking at Redux and State Management
+again more generally Performance Tuning
+of your applications and then finally
+how you actually get this thing off of
+your laptop or desktop and as and off of
+just your phone and onto other phones
+and mobile devices and we'll apply all
+of these Lessons Learned and the real
+challenges and the hands dirty portion
+of the class will be why by way of the
+course's projects three of them I signed
+specifications from us that spec out
+exactly what it is you should aspire to
+build and then the class will culminate
+with a final project where it'll be up
+to you to design to propose to design
+and ultimate really in Implement most
+any mobile application a top react
+native as you might like without further
+Ado let's dive into an overview of the
+class itself as well as then JavaScript
+let me turn things over already to
+Jordan great yeah thanks for the great
+intro David
+cool so
+um quick a few things about the course
+itself you can find the information on
+the website I emailed you all the link
+earlier today on it there's a link to
+the slack which is what we're going to
+use for like pretty instant
+communication you can create groups
+amongst yourself and we'll use that for
+any quick tidbits we might have to send
+out
+um and then additionally we have our
+staff email that's linked as well which
+is how you can just email the staff
+directly
+cool and so a little a little bit about
+lectures we'll have a short break about
+halfway get up you can use the bathroom
+go rest your legs if you have a question
+at all during the lecture feel free to
+just shoot up your hand or interrupt me
+directly
+Concepts constantly build on each other
+so it's pretty important to learn
+everything up to a certain point in
+order to build off of it later on
+um and if something isn't super
+important to know and you ask a question
+about it I'll let you know so don't
+worry about asking dumb questions
+and the staff will be monitoring the the
+slack during lecture so if people online
+have any questions feel free to post
+there and the staff will interrupt me
+another thing I love live examples
+um I think the best examples are created
+on the spot and with that comes a little
+bit of risk
+um so live coding does have risks if I
+make a mistake feel free to correct me I
+have some candy in the lectern so if you
+if you correct me I'll give you some
+candy for those online sorry you don't
+get candy but you can have some Glory
+cool
+um let's start talking about JavaScript
+so JavaScript is an interpreted language
+so I posted a little bit in the slack
+earlier asking about most comfortable
+languages most of you guys were saying
+JavaScript but I know uh those of you
+who took cs50 might have some experience
+with C which is a compiled language so
+JavaScript is not compiled
+um uh it's actually interpreted so an
+interpreter will read line by line
+execute that code line by line each
+browser has built into it a it's known
+JavaScript engine which either
+interprets the code it might do some
+magic with like some just in time
+compilation but for the most part it's
+just reading a code line by line and
+executing it
+each browser actually has its own engine
+and they're named so Chrome is called V8
+if you've heard of node.js at all it
+also uses that same node V8 engine
+Firefox has spider monkey Safari has
+JavaScript core chakra for Microsoft
+Edge and Internet Explorer you don't
+really need to know these names but it's
+a little bit important just to know that
+different ones exist
+because JavaScript actually has is built
+off of a standard the standard is put
+out by ecma which stands for the
+European computer manufacturers
+Association that Association is
+um they're in charge of just putting out
+a spec meaning hey I know you guys have
+this language but this is exactly what
+this language needs to do and for every
+single function this is exactly how this
+function should behave I mean so each of
+these browsers uh the engines in the
+browsers actually implement the standard
+but there are some functions where the
+standard is a little bit hazy on or
+maybe it doesn't even Define this
+particular function
+um and there there's no Hardline exactly
+what that that function should do so
+they may differ for anything not defined
+by that standard
+go on some some syntax
+um let's actually hop into code directly
+for this so let's do
+cool and the way that you declare
+variables in JavaScript there's actually
+three different ways we'll talk about
+that a little more later but for now
+we'll just use this keyword called const
+so if I wanted to declare a variable I
+just say const so give me a variable
+called first name
+and I can give it any value I want so
+let's just call it my first name
+um so you notice I have a string literal
+there it's using double quotes and then
+I end that statement with a semicolon
+I can also do last name
+and if you notice this time I still have
+that string literal but this time I'm
+using single quotes because in
+JavaScript there's really no difference
+between double and single quotes you'll
+also notice I omitted that semicolon
+which in JavaScript is okay semicolons
+are actually optional
+cool
+um so say I wanted something that was
+not a string I can just give it a value
+like 42. so in C you might see something
+like give me an INT or give me a string
+or a Char star
+that you're declaring types right away
+with C but for something like JavaScript
+you actually don't have to do that
+we can also do arrays
+and we can just declare them in line
+like this and I can have
+so if you notice I actually have three
+different types all in this array so I
+have a string I have a number and I have
+a function and this is perfectly fine
+JavaScript doesn't really care what
+you've thrown in an array you can have
+all sorts of different variable types
+um and so say we want to access those
+things in an array anybody care to guess
+exactly how I would do that so say I
+want to execute that function how might
+I go about doing that any guesses
+yeah
+yeah exactly array of two so if you're
+familiar with other languages a lot of
+them have the same Syntax for indexing
+into an array and so since we have three
+things in this array we do what's called
+zero indexing whereby the first index in
+that array is called the zeroth index
+and the new count from there so we have
+zeroth here first and second here and so
+say I wanted to access that function I
+just do array two and I get that
+function and say I now wanted to execute
+that function I can say execute it like
+that so this is something that you might
+see in other languages but JavaScript
+you can do it as well you can just grab
+that function out of that array and
+execute it like that
+say I wanted a for Loop and I wanted to
+console log everything in that array I
+can do it just like almost like C so I
+can do four
+this time we'll use let for the variable
+we'll talk a little more about that
+later so I can start at zero well I is
+less than the raise length
+um you might see me my my personal
+preference is to omit the semicolons but
+you might read something online that has
+them it really doesn't matter all that
+much and so this line of code here you
+might have seen a for Loop in other
+languages that you've used so this one
+is just saying four give me a variable
+that's called I that starts at zero and
+while it's less than the number of
+values in the array array.length just
+keep incrementing it and then at every
+single time console.log which is
+javascript's print function whatever
+that value in that array is so we can
+actually run this
+and as you see the first time
+line 12 where we say
+index into that array to the second
+value and call it that's what's Printing
+High and then this for Loop here will
+now print string 42 and this thing
+called function which is this function
+cool any questions on syntax yeah
+in your array there does it matter
+uh it does not matter so the question
+was does it matter on line nine that
+comma at the very end
+um and so JavaScript allows you to have
+trailing commas meaning in arrays
+objects or even function calls you can
+actually have extra commas and it
+doesn't matter whether you have it there
+or not it's optional just like the
+semicolon is but where I too omit the
+comma here and try to run that
+I'm going to get uh
+a syntax error as expected
+cool any other questions
+great
+so back to slide so type so we talked
+about types A little bit earlier and I'm
+just going to talk a little bit more
+about them so JavaScript has what's
+called Dynamic typing meaning given a
+variable it has no type associated with
+it so just like I said give me a string
+call or give me variable called first
+name and set it equal to a string I
+could actually change that later to say
+a type number or a Boolean or anything
+like that and JavaScript is fine with
+that just because it has those Dynamic
+types
+and there are a certain number of
+primitive types primitive types are
+types with having have them methods and
+they're immutable and so undefined null
+are two of them Boolean everybody should
+know Boolean true or false number one
+two three negative one two three uh it
+has no floats so
+0 and 0.1 are both of type number
+string which are the things between the
+the print the
+quotes and then symbol which is
+something that's new in es6 but we're
+not going to talk about it nor are we
+going to use it
+and then everything else is an object
+and we'll talk a little bit more about
+that later
+cool and so a lot of languages have this
+thing where you check a different
+um where you change one type to another
+type so since JavaScript is dynamically
+typed we have this thing called type
+casting
+so coercion is the act of changing one
+type to a different type and there's two
+different ways you can coerce these
+variables so say as an example we could
+have this const called X and we give it
+a value of 42.
+say I wanted to change that value to a
+string there are a couple different ways
+I can do it there's explicit coercion
+there's implicit coercion so explicit is
+hey I'm just going to tell you exactly
+what I want
+um by wrapping it with the type that I
+want and give it to me and so that's
+being very explicit with what I want and
+so the example of that would be say I
+want to get a string from that value X I
+just wrap it with capital string and it
+pops out 42 is a string
+there's also a way of doing it
+implicitly which is I'm going to rely on
+the behavior of JavaScript in order to
+get this to a string and so say want to
+add 42 to empty string
+that wouldn't really make sense if I
+wanted to have a number but since 42 is
+easily castable to a string I can say
+hey give me 42 add an empty string and I
+expect to get back something of type
+string that is called implicit coercion
+and so how might we go about comparing
+oh yeah question
+uh yeah so another way would be to
+invoke that
+so the question was uh what about x dot
+two string and so yes another way to get
+from a number to a string would be to
+invoke that method on the string
+or on the number sorry
+cool and so how might we go about
+comparing values so in most languages
+you can compare values with the double
+equals but JavaScript has this thing
+called triple equals so there are two
+different ways of comparing quality
+there's double equals and there's triple
+equals where double equals will actually
+coerce the types and triple equals
+require that the types match
+and so let's play with that a little bit
+so
+so say I have this value
+and I want to know exactly what type
+that is so there's this there's this
+operator called typo in JavaScript where
+I can invoke this
+and that will give me the type of
+whatever oops
+whatever that variable holds
+so if I were to run this code
+then it would say number because that is
+the type so right now in order to
+execute my JavaScript I'm using this
+thing called node which as mentioned
+earlier is basically a command line
+runtime for JavaScript which is built
+off of V8 you can actually also use the
+built-in any browser has a console where
+you can also just type JavaScript
+directly in there so if I were to open
+up the tools on
+Chrome which is my browser of choice
+I actually
+get this
+which
+is a JavaScript console built into all
+of these browsers so if you guys are
+using Chrome at home and you want to
+follow along you're welcome to open up
+the developer tools here go to console
+and you have your own JavaScript
+interpreter here so say I wanted to do
+that things where I do cons x equals
+42 and I wanted to get the type of that
+variable I can just do type of
+X and it will output that number
+um
+so there's a little bit of a caveat with
+this where
+this might surprise you
+so who thinks I can guess what this will
+output
+first of all what what should it output
+so if we remember back a few slides
+we talked about all the different types
+one of them is undefined one of them is
+null and say I want to
+um
+get type of null
+so what should it output
+yes
+string why would you say string
+um
+that's a good guess so basically the the
+answer was so if you can console log it
+it must be a string and
+um while that is
+a correct uh most of these types can
+actually be cast to Strings so we talked
+about implicit versus explicit coercion
+and the way that console log works is it
+actually will turn these numbers into a
+string in order or turn these values
+into a string in order to console.log
+them but it doesn't necessarily mean the
+type of that value itself is a string
+yeah no yeah so the no so we would
+expect type of null to be null since
+null is actually a primitive type
+however this actually returns object
+um
+so JavaScript does have some strange
+Strange Behaviors this is one of them
+um and people often ask hey like we're
+on es6 now like there have been six
+different value versions of JavaScript
+why don't you just change this to be
+null
+um
+and the answer that ecma gives is well
+the whole internet would break
+um and so a lot of these the each new
+version of ecmascript should definitely
+be backwards compatible with the
+previous versions otherwise say I put
+out a website tomorrow if somebody comes
+down and changes a JavaScript spec then
+my website might break and so a lot of
+websites actually rely on this to be
+true and therefore if if a breaking
+version of ecmascript is released it
+might actually just have unforeseen
+consequences so this is just one of the
+strange JavaScript gotchas
+cool um so another question might be
+asked a good question would be so when
+should I use double equals versus Triple
+equals and people tend generally say you
+should never use double equals
+um because you that means you have to
+know exactly how every single thing
+coerces and not only you but every
+single person who reads your code should
+know what all these values coerce to and
+some of them might be somewhat
+surprising so we have a chart here that
+talks about the JavaScript equality
+table for those of you who have the
+slides opened you can click on that link
+and it will bring you to the repo that
+has this basically some of these strings
+are somewhat strange like how
+um empty array is double equals defaults
+which doesn't really make a ton of sense
+a lot of these don't really make a ton
+of sense and
+basically never use that double equals
+because it might have some Strange
+Behaviors
+cool so moving on with coercion
+um so we talked about coercing things
+into other types but how about if we're
+getting to Bulls so JavaScript has these
+things called falsy values who can name
+a falsy value
+so falsity value is any value that if
+cast to a bull becomes false
+two two
+so two is actually truthy so every
+number except for one number is truthy
+well two numbers actually yeah so zero
+would be one of them yeah
+not a number which is actually a number
+of type number is also about falsy value
+who can name another falsely value
+blank what
+empty what
+empty array is actually truthy
+false is another one
+undefined no
+so those are the five falsy values
+so who can name some truthy values
+somebody said two which is a valid one
+three four every other number other than
+zero negative zero not a number
+empty array is also Another truthy Empty
+object
+and literally everything else so
+anything other than those values is
+right there are truthy
+cool so objects arrays functions objects
+um it looks like I put objects twice
+there but I actually put it four times
+so JavaScript has this weird thing where
+if it's not one of those primitive
+values it's an object
+um
+and so we'll talk about this thing in a
+little bit called prototype inheritance
+which talks about how these how these
+objects inherit from each other and how
+they actually work under the hood but
+first let's let's compare those two
+types so we talked about Primitives
+earlier which is who can name some of
+the Primitives
+no undefined
+number
+Boolean
+string
+and simple so good you got them all nice
+um so print so everything other than
+those primitive types are actually
+objects so Primitives are immutable
+which is which means if you want to
+change them you're actually replacing
+them with a new value rather than
+actually changing them themselves
+whereas objects are not they're actually
+mutable so who knows what storing by
+reference means
+so so storing by reference means we
+actually store a reference to this
+object thing and we can actually change
+what is held there without actually
+changing where that thing is located on
+in memory we'll talk a little bit more
+about that in a second
+um
+but the opposite of that would be
+storing something by a value which is
+what happens when you have Primitives so
+like I said earlier Primitives are
+immutable which means once you create a
+primitive it can't actually be changed
+and you want to when you want to change
+something you actually create a new
+primitive and replace that old one
+whereas mutable things are actually
+stored by reference and you can actually
+change that object and so let's let's
+play with that a little bit
+um so there are a few different ways to
+create an object
+um one would be this way
+so just saying give me a new object
+um and so now o is this new object thing
+I'm going to say we want to start
+populating that object we can do O DOT
+oh DOT first name
+and assign that a value
+oh dot last name
+assign that a different value
+notice that I have strings with double
+quotes and single quotes it doesn't
+matter
+um oh so something other than a string
+we can do about a Boolean so is teaching
+we can assign that to true
+o dot greet
+and we can give that a function
+um Michelle that would be one way of
+creating a new object is to use this new
+keyword along with capital objects and
+that says hey give me a new object and
+I'm just going to fill it up with these
+values using this dot notation
+um another way to do that would be
+what's called an object literal
+so I can just do open curly close curly
+and that gives me basically a new object
+um this is actually the preferred way
+over that old new keyword with object
+um mostly because a is easier to read
+and well mostly just because it's easier
+to read
+um and so I can start filling those
+values in with O DOT first name
+um and another way to index into these
+objects is to do a last name
+so notice I use brackets there which
+means inside this bracket I'm going to
+have some value and that value is going
+to be that key of that object so I can
+do same thing here
+um
+and say I actually wanted to
+use not a string literal inside these
+brackets I could also do that so I could
+do
+is teaching
+and do o and then pass in this variable
+here
+with a value of his teaching and that
+will set that key
+and then say I want to do o of greet
+and give that same function
+cool so those objects are basically the
+same
+um and last we can actually put
+everything in line so we can do
+this
+cool and so those three objects are
+basically the same thing it's just three
+different ways of declaring objects
+um you can also Nest objects so say I
+wanted an object within an object that's
+also fine
+say I want to do something like this
+um
+that's also fine so that's an object
+within an object
+any questions with that
+cool
+um
+so anything so anything here
+is interpreted as a string so say we
+were to do like this
+that would be basically one as a string
+so that this value here will be cast as
+a string and that's what will be used as
+the key
+so the question was like can we use
+numbers or anything other than strings
+as keys and objects and the answer is
+kind of because everything will just be
+cast to a string
+but yeah great question
+um just actually copy and paste this
+into our browser and we can confirm that
+it works
+um and so how might we go about getting
+those values back out
+so it's basically the same way we got
+them in so if we do dot we can see oh
+these are all this is the browser saying
+oh these are all the keys of that object
+so I can do o3.address and it'll give me
+back
+um that object and so say we want to get
+this number out of here how might we do
+that
+yeah exactly DOT number
+alternatively we could have also done
+this
+and gotten the same thing
+any questions with objects
+um to do what
+between
+cool yeah so the question is is there a
+conventional way to get values out of
+objects generally the convention just
+use that dot notation so say we wanted
+O3 dot address
+that number the convention would be used
+the dot both of these times but say we
+didn't know exactly what we wanted out
+of it we could so say we had this
+um
+something like that where we have some
+Dynamic key where the Kiwi didn't
+actually know that's when you actually
+have to use the bracket notation where
+we have O3 dot address and then we pass
+into it that key
+since key is a dynamic since it's a
+variable we don't know what it is we
+have to then use that bracket notation
+rather than the dot but great question
+uh yeah
+uh so if we did 0.1
+yeah so 0.1 one here since we're typing
+it here is a number and we cannot set
+keys to numbers
+um but if it were in object literal like
+this
+it considers this not to be a number but
+rather a string
+um
+so I think you mean this
+uh
+and I believe you can also do this
+because that will get cast to a number I
+mean a string
+yeah any other questions
+cool yeah
+so the question is what is the
+difference between this here and this
+here the difference is
+anything between the brackets will get
+coerced into a string and so since this
+is already a string it's just that
+string one since this is not of type
+string it actually gets implicitly
+coerced into a string and so like we saw
+earlier if we did one plus some empty
+string we get back the string one so
+this becomes a string one and it will
+index into that whereas this number here
+so if we did o3.1
+um that one does not actually get
+coerced like it does
+between the brackets here
+um so the job so JavaScript is basically
+saying hey this doesn't really make
+sense I need a string here not a number
+cool any other questions
+great
+um
+so let's talk a little bit about this
+thing where I was talking about
+um
+mutating objects
+so say
+I had this object so
+in it we had
+a gets a
+b gets B
+so say I wanted to change a to be
+something else how might I do that
+yeah
+yeah so I can update this to be anything
+else
+cool but say I actually did this
+anybody care to guess what would be
+console logged here
+so basically what he's doing is we're
+creating a new object
+it's storing it in oh this object has
+two keys A and B where their values are
+A and B respectively I'm creating this
+new object called O2 and assigning a
+value of o
+I then go reset o not O2 but o dot a to
+be a new value and now I'm going to
+console log O2 dot a
+anybody care to guess what this is going
+to console log yeah
+so I guess is a what would be the
+alternative guess
+new value
+um
+yeah so let's run that
+so you get new value and so I talked
+about this thing called passing by
+reference and passing by value
+um so basically What's Happening Here
+is that always being said hey give me a
+new object somewhere
+and then store inside of it A and B
+and then O2 says hey give me another
+object and set it to O and rather than
+creating a new object with the same keys
+and values it's actually pointing to
+that same object so this is a case where
+things are getting stored by reference
+rather than by value
+meaning so in cs50 we talked a little
+bit about pointers and this is the exact
+same concept where these objects are not
+stored as entire serialized objects but
+rather as references to these objects in
+memory so o and O2 are both referencing
+that same exact object so when we go
+back and say hey update
+o.a to be new value
+is changing this object here and still o
+and O2 are both pointing to that same
+object
+so if I were to have updated O2 here and
+console logged o.a
+um we would get that same result because
+o and O2 are still both referring to
+that same object in memory and we're
+still updating that object here
+does that make sense
+yeah
+yeah so the question is what if we
+wanted them to have the same value but
+be different references how might we do
+that
+um there are two different ways
+um one the more annoying way would just
+be to
+type the whole thing out again
+so now we're guaranteed that o and O2
+are going to be different
+references to an object that is
+basically the same
+um and another way would be to there are
+multiple different ways to do this the
+most common way in pure JavaScript would
+be to do this
+whereby object assign is basically
+saying hey pass into me a bunch of
+arguments and every single argument I'm
+going to merge into the previous one
+those those keys and values and so this
+is saying give me a brand new object so
+I'm using the object literal here to
+mean a new object and then merge into it
+all the keys and values of this object
+called o and so this is basically saying
+give me a new object and then set all of
+the keys and values of O to be in there
+so this is the way of cloning an object
+but say we actually did this
+so what do we expect this to now print
+out
+so we we mentioned that line nine
+um we're taking the keys and values of O
+and merging those into a new object
+and then at line 11 we're taking O2
+getting the dot object still accessing
+the value with the key called object and
+then setting that object's key called
+key to a new value and then now console
+logging o.object.key
+uh yeah so this so the guess is new
+value and that is absolutely correct
+um
+so this so line nine here is doing
+what's called a shallow copy which is
+just grabbing the keys and values of
+some object and just setting those
+blindly into some other object
+um as opposed to what would be called a
+deep copy where that would take the keys
+and values and then if the values are
+objects you would also take those
+objects keys and values do that
+recursively
+and basically get every single layer
+deep clone but since object.assign just
+takes the keys and values dumbly if we
+have an object in there update that
+object's key
+um o.obge and O2 to object are still
+referencing that same object in memory
+so since we updated we mutated that
+object
+it would update in both O2 and O does
+that make sense
+great any questions about
+this
+yeah
+so how would you do a deep copy
+um that's a great question there are
+multiple different ways
+um
+so most people would say use a library
+meaning rather than implementing this
+thing on your own just take somebody
+else's implementation
+um
+but that's let's actually do that that's
+that's a good question so how would we
+do a deep copy
+so I know we haven't talked a ton about
+JavaScript yet but let's actually try to
+do this together so let's call function
+deep copy
+I mean we're going to pass into it some
+object
+um and how would we implement this if
+we're guaranteed that every no objects
+have values of objects meaning we are
+guaranteed not to have objects within
+objects
+how might we do this
+yeah so we can check for the type of
+every key but if we're guaranteed that
+no values are going to be objects we can
+just do a shallow copy right
+yeah so hold that thought that's
+actually implement this as if we know
+that there are no objects inside of
+objects so if that were true we could
+just return the shallow copy right so
+object dot assign
+so this would be a perfectly valid
+implementation if we knew that there's
+no such thing as objects within objects
+but since there are we're going to have
+to do some magic here
+um
+so can you repeat your recommendation
+again
+nice so basically
+um so check every single value and see
+if it's an object if it is an object
+then go ahead and decopate that object
+otherwise return that value
+cool
+um so let's do that so
+um the way to get the keys of an object
+is this function called object dot keys
+um so so by doing object.keys and
+passing in that object we now have an
+array full of the string values of the
+keys in that object and so we're going
+to do is we're going to iterate through
+those keys check to see if the value is
+an object if so we'll go ahead and clone
+that let's not worry about functions or
+any of those other things for now
+otherwise just return that value
+so let's have this for Loop
+and do that so first let's define
+the new object that we're going to
+return and let's just start with an
+empty object for now
+and so now we have to check to see if
+each of these values is an object if so
+copy it otherwise return so how are we
+going to check the type of a particular
+key
+yeah exactly that type of operator so we
+can do if
+type of
+object and then pass in by keys
+so what do we want to check against
+all right what what am I doing wrong
+here
+yeah we should always use that three
+equal signs in this case it wouldn't
+matter but
+um we should just get in the habit of
+doing that
+um so if you notice here we actually
+have bracket notation within bracket
+notation that is totally fine
+cool so if something is an object what
+are we going to turn
+we can do object new object
+with that key
+equals what
+yeah let's actually deep copy that value
+Q2
+otherwise
+we can just set it equal to the other
+key
+and then at the very end we can just
+return that new object
+cool
+um anybody see any bugs
+candy opportunity
+all right let's just go ahead and test
+this
+so
+let's do
+copy o
+then update o
+dot object dot key let's set it to New
+Key
+03 dot object
+key
+get rid of that
+all right so Moment of Truth
+key rather than new key so we did it
+all right uh any other questions about
+objects mutating references any of that
+stuff
+no great
+um so
+um arrays as well are also stored by
+reference so if we were to do the same
+exact example and rather than updating
+the object we updated that array we
+would end up with the same exact results
+and so if we were to
+um
+update our deep copy function to also
+take care of arrays all we have to do is
+also check rather than checking object
+also check against arrays or any other
+data types I want to check
+cool
+let's move on
+to prototype inheritance so what exactly
+is prototype inheritance well so
+non-primitive types have a few
+properties and methods associated with
+them so array we have this thing called
+array.push which will add values to an
+array so say we have something like
+an empty array if we did array.push
+some value
+then array now has something in it if we
+were to push another value into it
+now has two values in it so
+array.prototype.push is some method that
+we have a variable on all arrays that
+just adds new values to an array another
+one would be like
+string.protected.2 uppercase so if they
+were to have some string so
+if we did stir.2 uppercase
+now we we're left with a new string with
+all uppercase so these are just from
+functions that we can invoke on any
+non-primitive that gives us something
+else
+that is available to all non-parameters
+of a given type
+so each object stores a reference to its
+prototype meaning
+um it has all it knows about all these
+methods and it stores a reference to
+that object in order to know where these
+methods um
+the code to actually run that lies
+um and say we have a prototype chain
+where there are a bunch of different
+methods of the same name whichever one
+is bound most tightly to the instance
+has the priority so say we have
+an object
+um and an array where array is the so
+say we have a value that is of type
+array up the Prototype chain we have
+arrays it's Proto its prototype is array
+that prototype is object say we have the
+same name method on both of these if we
+call that method the one that's bound
+most tightly the array will take
+priority so let's actually show that so
+say we have something like
+um
+that are
+so array it has a reference series
+prototype so if you did array Dot double
+underscore Proto
+double underscore we see this
+large object with a bunch of different
+functions and so we see down here
+push which is that one that we invoked
+earlier
+so this is exactly how it knows where
+that push implementation is
+and so we can do array.proto Dot
+Proto
+and go even farther up the chain so this
+one
+has a bunch of other ones to string
+value of whatever and if you notice both
+the arrays prototype and it raise
+prototypes prototype have this method
+called two string
+and if I were to invoke array
+dot two string which one of these is
+going to actually get called
+the second one which one is the second
+one
+dot proto.proto so
+actually the opposite so since the two
+string on the array prototype
+um
+is more specific than the tostring
+method on the object prototype this one
+is going to get invoked
+um because it's just because it's more
+specific because an array is an array
+and it's an object
+but it's more specific to call it an
+array than to call it an object so it's
+going to invoke the one on the array
+does that make sense
+anybody have a question about that it's
+an important concept and a little bit
+confusing at first
+cool um so most primitive types have
+object wrappers and so we talked about
+how primitive types don't have
+um any methods associated with them
+but primitive types also have wrappers
+that have
+prototypes associated with them
+what the heck does that mean so if I
+were to do 42.2 string it's going to be
+like what the heck do you mean 42.2
+string
+right we I told you that
+um
+these primitive values don't have
+methods and so 42.2 string doesn't
+really make sense
+but say I were to do this thing const
+num equals 42 and did num dot two string
+that will actually do something and
+that's a little bit strange so this is
+another one of those JavaScript
+interesting
+um behaviors because all of the
+Primitive values have wrappers that give
+them access to a bunch of methods
+and JavaScript will automatically do
+what's called boxing for you
+which it says Hey like I know 42 is a
+primitive but if you call this two
+string method I know what you mean I'm
+gonna I'm gonna box this 42 number with
+this prototype that has a bunch of these
+methods on it
+so if I already do 42.2 string that
+would make sense and if I do num Dot
+Proto
+that actually exists but 42.proto
+does not
+does that make sense
+um another way to find out if
+a value is an instance of some type you
+can do this thing called X instance of
+number and that would return false
+because X is actually not of type
+Capital number it's just boxed around in
+that number object for your
+um reference
+does that make sense
+again not something you're going to use
+every day just something that is helpful
+to know in case you run into these
+strange Corner cases
+cool
+um so why would we use a reference to
+the Prototype
+and what is the alternative there
+anybody care to give a shot at that
+so this is going back a little bit to
+deep copying versus shallow copying
+yeah so if the initial object is massive
+like what happens then if so the
+alternative is basically to clone every
+single
+to deep copy every single prototype
+every single time you create a new value
+which is safe because that that number
+and all of its methods are all
+encapsulated within that specific
+variable
+but it's also a little bit expensive in
+both performance because you have to do
+that deep copy every single time and
+also of memory because that object
+starts to get every pretty large and if
+you have an array of like 100 different
+things all hundreds of those deep
+copying every single prototype gets
+pretty big
+and so what is the danger of storing a
+reference to the Prototype rather than
+rather than copying the whole thing
+yeah exactly if you change it then it
+changes for every single value of that
+type
+so let's let's do that really quick so
+so we have
+um
+so we still have num which is equal to
+42 right and if we do num.2 string
+what do we expect to come out
+42 is a string right but say some
+devious programmer was doing this thing
+where he did number
+dot prototype
+.2 string
+and you actually override that to be
+some function that will return
+100.
+now what happens if I call a num.2
+string
+wait a second
+so that could have some dangerous
+penalties right so if if I were to
+change the Prototype of the number class
+even though num was declared
+100 lines prior to
+be the number 42 and we tried num.2
+string here and x and it returned 42. if
+we were to change the Prototype later it
+affects everything that has ever
+happened so num.2 string now starts
+returning 100 and everything that will
+happen so if I were to do
+everything in the future also has those
+consequences so changing the Prototype
+is something that is very dangerous and
+is recommended against doing
+does that make sense
+cool
+um so let's
+actually take a short break all right
+welcome back
+um so let's talk about scope now
+um
+so what the heck is scope so scope is a
+term that's talking about variable
+Lifetime and how long these variables
+actually exist
+um
+and so there are a couple different
+types of scoping there's lexical scoping
+which is that keyword VAR that you might
+see if you're reading old JavaScript and
+there's block scoping which refers to
+um how things like const or let are
+scoped so lexical scoping is basically
+saying hey give me a variable and it'll
+exist for as long as since it was
+declared all the way until the end of a
+function ends or the file if it's in a
+file whereas the analog would be block
+scoping where it behaves a lot like if
+something behaves in C where basically a
+variable will be around from when it is
+declared until the next end curly brace
+is reached
+um and so that that there's the big
+difference between VAR and constant let
+and the difference between constant let
+is that const is something that can't be
+updated meaning if I set a variable
+um to be a constant it means I'm not
+going to update that that reference
+later
+um whereas let can be updated
+so if I were to do const
+this is a const
+and set that equal to something like 50
+if I were to say this is a const
+and try to update that to be 51 I'm
+going to get an error actually that says
+hey you call that a const but you're
+trying to change it that's not okay
+um and so no matter how I want to change
+it say I do that plus plus or something
+that's also going to fail
+whereas if I did something like let this
+is
+a let equal to 50 I can go ahead or 51.
+I made a typo but I can just say hey it
+was a typo this is a let
+let me change that to 58 and we're all
+good
+and I can also do that plus plus or
+change it however I want and
+it will actually update that
+note that I said the reference can't be
+updated I did not say anything about
+things being immutable so if I did const
+um
+equals this empty object if I then I
+can't update it to be a pointer
+different objects if I tried to do obs
+is something else I'm going to say hey
+you called this a constant you're trying
+to change it
+but I can still do object dot a and set
+that equal to a because
+why anybody care to tell me why
+exactly so the pointer is still pointing
+to the same object the reference has not
+changed
+so we mutated that object but it's still
+pointing to that same place in memory
+it's still pointing to that object that
+exists over here
+and that that reference has not been
+changed does that distinction make sense
+to people
+it's a pretty important one
+cool
+um so let's play a little bit with these
+variable lifetimes
+foreign
+so I said before that if I tried to do
+something like this
+what happens here
+error
+why because it's a constant and we can't
+update a constant I mean we can confirm
+this
+oh
+it'll actually tell us hey type over you
+call this a constant variable but you're
+trying to assign it that's not okay
+um
+but if we did
+this is okay because the reference to
+that object did not change was just
+mutated it
+um on the other side if we did something
+like let this is a let
+equal to 51 and then want to change that
+later
+you go to 50. that's totally okay
+um
+but if I actually tried to reassign so
+let this is a let
+if I try to do this again it's going to
+yell at me because it's saying hey you
+already declared something called This
+is a let you cannot declare that again
+and so constant let actually protect you
+from declaring the something with the
+same variable name twice which is
+something that VAR does not give you
+cool um what do you guys think would
+happen if I tried to do this
+anybody care to guess
+undefined
+so let's try to run it
+error so since these things are block
+scoped it means the variable is declared
+at the line that it is written
+and if we tried to use it before then it
+actually does not even exist at all so
+if I tried to console log something
+called This is a concierge remember the
+JavaScript interpreter is just reading
+down
+and it won't see like hey what the heck
+is this as a const I have no idea what
+that is so I'm just going to error here
+um
+uh same thing if I try to do this is a
+let here
+that will also air with the same error
+um why does air
+because we're trying to
+declare two variables with the same
+variable name twice so we have let this
+is a let equal 51 here and we try to do
+it again and saying hey you already have
+a variable called This is a let so I'm
+not going to let allow you to do that
+again so it's going to be
+this error right here
+uh yeah it's saying like
+basically I'm saying hey give me a
+variable call this is a let here and
+then a couple lines later I'm saying hey
+give me a variable called This is a let
+and JavaScript says Hey like you already
+have a block scope variable called This
+is a let
+um so I can't give you another one
+however if I tried to just update it
+like this that's totally okay
+any other questions here
+so the other thing we said we can have
+these things called VAR if I did VAR
+this is a VAR equal to 50. that's fine I
+can update it
+that's also fine I can also do this
+and that won't yell at me so
+vars are older ways to declare variables
+and they don't have the same protection
+that Latin cons do you can
+um
+you can override them like this and it's
+totally okay and you can actually
+declare a whole new variable with the
+same variable name and that's also okay
+um
+and something yeah
+it just
+yeah so that's
+so if I try to run this
+it will update the old one it'll just
+replace that value it's actually called
+shadowing where you create a new
+variable with the same variable name
+which basically just overshadows that
+old one so it's as if that other one
+didn't exist
+does that make sense
+cool so check this out
+so this errors and we know this errors
+but say I were to do this
+you'd expect this to also air
+but it actually does not
+it returns undefined
+so this is another weird thing about
+JavaScript this is called hoisting and
+so certain things are hoisted which it
+means basically it takes the definition
+of something and hoists it to the very
+top of the file and does that first
+and a few things are hoisted VAR the
+actually the Declaration of the creation
+of an empty variable are hoisted
+function definitions are hoisted as well
+but constantly are not as we saw if we
+tried to access the variable name of a
+conster let then it errors but with the
+VAR the Declaration of that variable is
+actually hosted
+um
+and we can talk a little bit more about
+how that works in a second but let's
+actually play with it a little bit more
+so function definitions are hoisted
+so
+let's clean up this file a little bit
+so let's call this new function called
+um so this is console.log
+so I Define this function called This is
+hoisted at the very bottom of the file
+and all it does is it console logs
+there's a function declared at the
+bottom of the file but something very
+interesting is at the very top of this
+file I can call it
+and that will actually work
+um and so that is what's called function
+hoisting
+the behavior whereby a function
+definition declared at the very bottom
+of a file is actually available for use
+at the very top of the file as well
+um
+but this does not work in other cases so
+say we're to do something like this
+so who can tell me what the differences
+between line 21 and line 25
+. they look pretty similar right yeah
+okay
+yep so repeating for the camera line 25
+this is not hoisted is declared as a
+constant so it cannot be changed whereas
+line 21 is declared as a function and so
+it can be changed which is absolutely
+correct
+um what happens if I try to do this up
+up here
+yeah so we're gonna we're gonna get an
+error
+this is not hoisted is not defined why
+because as we talked about earlier these
+things called consts are not available
+for use until they're actually declared
+so certain things are hoisted
+VAR so the Declaration of these
+variables are hoisted function
+definitions if they're declared like
+this are hoisted but if we create what's
+called an anonymous function a function
+without any name and set that equal
+to or assign that to be a constant
+then that constant is not created
+does that make sense
+so what happens if I try to do this
+yeah so same thing
+it errors
+what happens if I try to do this
+what's hoisted
+the function
+so notice
+oops
+so notice the difference in the two
+errors
+they're actually not the exact same
+error
+so who who wants to give a guess at
+what's going on here
+so when I declared it with the let it's
+saying reference area reference error
+this is not hoist is not defined whereas
+when I use a VAR it says type error this
+is not hoisted is not a function why
+might that be yeah
+exactly so repeating for the camera and
+I'll bring up the code as well
+um so down here so the first time when
+we declare this with the let
+is not
+declared at all this this variable does
+not exist at all so this is not hoisted
+the JavaScript does not know what that
+means on line one but when I use a VAR
+here
+remember it Hoist the Declaration of
+this variable so it creates a variable
+called This is not hoisted however it
+does not assign it value until line 25
+is executed and so at line one this is
+not hoisted exists it's just equal to
+undefined and if I try to invoke it like
+a function it says hey this is an
+undefined variable I can't invoke it
+like a function this is a type error and
+so even though both of these things
+aired the reason that they aired is
+slightly different in case one when
+they're declared using a const or let
+that variable just does not exist at all
+however when we declare it using VAR the
+variable exists it's just undefined and
+so if we try to invoke it like a
+function then it says Hey like this is
+undefined it's not a function
+does that make sense to everyone
+so why why does this happen
+how how does this happen
+um and the reason is actually how
+JavaScript is executed
+um so there's two phases in the
+execution of a Javascript file so before
+executing any code it has all of the all
+the text in front of it but it hasn't
+executed anything it just reads the
+entire file
+and what's it looking for well one is
+looking for anything wrong with the file
+so say like my very first example when I
+had an array and it was missing a comma
+that's something that's caught in that
+first reading it says Hey like
+this looks like an array but it's not
+quite right like I see this thing that
+I'm not expecting I'm expecting a comma
+here
+um and so that's one thing that's caught
+other things maybe it will add some
+semicolons for you and stuff like that
+hmm
+and then
+any function definitions just get saved
+in memory it says hey this is a function
+let's put this in memory so if somebody
+wants to use it at line one they're able
+to
+variable initializations if they're
+lexically scope or I mean if an
+electrically scoped they will be
+declared but they will not be
+initialized meaning anything declared
+with VAR will be declared like this
+variable exists but it's not going to be
+set equal to anything until later
+and then there's a second phase called
+execution phase whereby the the code is
+actually run it's executed and so that
+is when things like const or let's
+get invoked or get both declared and
+initialized
+does that make sense to everyone
+anybody have any questions on scope
+so my why might we take advantage of
+this scoping does it seem like a feature
+does it seem like a bug
+anybody care to guess there's no correct
+answer to this it's completely opinion
+yeah
+more
+yeah so one one thing might be we can
+have these function declarations at the
+very bottom and then we can use it at
+the top and so that might be good for
+code organization like somebody reading
+your code would know hey if I'm looking
+for these functions they're all going to
+be declared together at the bottom
+they might be used everywhere but all
+the function declarations are all going
+to be here so that might be a feature
+because it's good for organization
+so say we were to play Devil's Advocate
+who might see this as a bug
+okay so the question is like why can we
+declare two variables with the same name
+when they look like they're in the same
+scope specifically with this of our
+keyword this is another thing where it's
+it's a bug slash feature that a lot of
+people used and so if JavaScript were to
+be updated and that bug slash feature
+were to disappear a lot of code would
+break
+so a lot of people took advantage of
+this
+um and basically it's the same thing as
+like why is type of null object
+um
+just because it is and we can't change
+that because people rely on that
+behavior
+I know it's kind of an anti-answer but
+does that
+kind of make sense
+yeah you should definitely so there's
+not really a good reason to use VAR
+anymore with es6 everything everything
+supports constant let now
+um and so I've been using them in all
+the examples except for these
+um and I think you should definitely use
+them as well the reason I'm teaching VAR
+is one
+so if you see this you know what's kind
+of going on and because a lot of Legacy
+code a lot of code written to five years
+ago 10 years ago uses VAR just because
+it was the only option
+one thing that I didn't mention earlier
+is that you can also declare a variable
+like this
+so this is another way of declaring a
+variable
+um
+this creates a global variable
+it's something that you probably won't
+see the opt-in there's really no reason
+to do it but in case you ever see that
+that's what it is
+so if you declare a variable without
+giving it a keyword like let conster VAR
+it creates it globally
+um
+but there's no reason for you to use
+this really
+it's just if you ever see it that's
+that's what it is
+any questions at all about scoping it's
+a pretty important concept
+um
+and for online folks as well remember
+you can post in slack and the staff will
+either field those questions or ask them
+to me
+cool so let's move on to our final topic
+topic of the day
+um
+so the global object so the way these
+things all work is
+um
+basically in any given runtime there's
+this thing called a global object and so
+all variables all functions are actually
+keys or parameters or methods on the
+global object so in browser there's this
+thing called a window which is a global
+object of a window so
+this is a browser environment
+and if I type window
+I see this thing
+and it has
+a lot
+in it
+so much that it froze my computer
+ah there we oh no
+but basically the window is this global
+object and on it there's all sorts of
+stuff so we see dollars dollar zero
+dollar zero a
+so these so any variable that you
+declare in this console gets put onto
+this global object called window
+um and so actually let me open a brand
+new browser tab
+and we'll get a little bit of a cleaner
+window so the reason that we saw these
+things called dollar zero dollar
+whatever is because I open these the dev
+tools on the same tab as my lecture
+slides
+and
+the way that Google Slides works is
+since it's something Dynamic on the web
+it has to be using JavaScript and since
+it's using JavaScript obviously it's
+creating a bunch of functions it's
+creating a bunch of variables and all of
+these things end up on the window object
+and so when we checked out when we
+inspected the window object of that
+particular tab there was a bunch of
+stuff on it because that's how Google
+Slides was working
+um and when we created a new tab
+this is a brand new tab and therefore no
+JavaScript has been executed so there's
+a lot fewer
+variables and stuff on this new tab
+and so whenever we create new variables
+so say do const x equals this is a new
+variable
+we see X is this we can also do this
+window dot X
+I declared as a const
+um so the way that browser windows
+handle these block scope variables is a
+little bit different but so we'll use
+bar for the sake of explanation so when
+I create this new variable called VAR y
+it is the exact same thing as window.y
+um and so if we inspect a window
+we see a bunch of things that are part
+of the JavaScript API the browser API
+all these things and if we go all the
+way to the very bottom
+so this is stuff that is created in the
+new tab
+Elemento p q r s
+we see this y here
+um so part of that window object
+is that variable called y that we stuck
+on the window and so even though we
+declared it with VAR y equals something
+it ended up on that global object and
+that's how JavaScript keeps track of all
+of your variables and stuff
+and so what happens when
+we're in the node environment
+and we Type window
+up Windows not defined and it's because
+in the node environment the global
+variable is not called Windows actually
+called global
+and if you type Global we now see
+all of these things
+and a lot of this will overlap with that
+window object in the browser but since
+the browser API has things in it that is
+not necessarily used in the command line
+stuff like give me a Dom node or
+give me CSS on this Domino and stuff
+like that that doesn't really make sense
+in the in the
+um
+command line interface therefore those
+things are not on this global object
+and then if we try to type global
+here in the window
+that doesn't really make sense either
+there's another thing that's just kind
+of important to know but you might not
+ever take advantage of it
+um
+but does that does that make sense
+cool
+um
+so let's move on to something that we'll
+discuss a lot more in the next lecture
+but I'll go ahead and introduce the
+concept in this lecture and leave you
+with a little bit of a teaser
+so who here has heard of a closure
+before
+so closures are actually one of the
+things that JavaScript programmers hate
+the most
+because it's a very very difficult
+concept to learn
+not mostly because it's always taught
+somewhat poorly and so next time I'm
+going to try to do a good job of
+teaching you but I'm going to show you
+right now the pro the problem that a lot
+of people face
+um and so what closures are are
+functions it's the behavior whereby
+functions that refer to variables
+declared by a parent function still
+exist and it's possible because of
+scoping uh what the heck does that mean
+I'll explain it in the next lecture but
+let's go ahead and
+explore
+what this actually means
+all right
+um
+so let's do this
+so first thing I'm going to do is I'm
+going to declare an empty array
+called array and I'm going to fill it up
+with a few values
+um let's do five
+and I'm using VAR here intentionally
+and that's push on a function
+that does this
+and then
+all right so what the heck did I do here
+so I declared a function called make a
+function array and all it does is it
+creates an array fill it with functions
+and then invoke one of them
+and so if I were to call this
+if I were to call this I get back an
+array full of functions right
+and what do we expect those functions to
+do each of them
+print a number right and so
+what should happen is I should just I
+could should be able to march through
+this array invoke each of those
+functions and get back something that
+counts right basically
+so let's see what happens
+so I'm just going to access that first
+one and invoke it and we expect it to
+print out zero
+whoa
+so that there is one javascript's worst
+enemy or JavaScript programmer's worst
+enemy um because it's somewhat
+unexpected and as we'll see in coming
+lectures that is actually as expected
+um so I'll leave you guys with on that
+Cliffhanger for next time
+um and we'll go ahead and officially end
+lecture I'll stick around if you have
+any questions
