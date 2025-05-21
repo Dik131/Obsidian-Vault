@@ -299,3 +299,6 @@ const trueCopy = JSON.parse(JSON.stringify(original));
 - [Таблица сравнения типов](https://dorey.github.io/JavaScript-Equality-Table/)
 - [MDN: Типы данных](https://developer.mozilla.org/ru/docs/Web/JavaScript/Data_structures)
 
+---
+
+
