@@ -168,3 +168,134 @@ var oldWay = "Не рекомендуется";
   - Браузер: `window`
   - Node.js: `global`
 
+---
+# Подробнее про типизацию в JavaScript
+
+## Примитивные типы (Primitives)
+- **Неизменяемые** (immutable)
+- **Нет методов** (но есть объекты-обертки)
+- 6 типов:
+
+1. `undefined` - значение не определено
+   ```javascript
+   let x;
+   console.log(typeof x); // "undefined"
+   ```
+
+2. `null` - явное "ничего"
+   ```javascript
+   const y = null;
+   console.log(typeof y); // "object" (историческая ошибка JS)
+   ```
+
+3. `boolean` - true/false
+   ```javascript
+   const isActive = true;
+   ```
+
+4. `number` - целые и дробные числа
+   ```javascript
+   const num = 42;
+   const float = 3.14;
+   console.log(typeof NaN); // "number" (но это не число!)
+   ```
+
+5. `string` - текстовые данные
+   ```javascript
+   const name = "David";
+   ```
+
+6. `symbol` (ES6+) - уникальные идентификаторы
+   ```javascript
+   const id = Symbol("unique");
+   ```
+
+## Объектные типы (Objects)
+- **Изменяемые** (mutable)
+- **Хранятся по ссылке**
+- Примеры:
+  - `{}` - объекты
+  - `[]` - массивы
+  - `function(){}` - функции
+  - Даты, регулярные выражения и т.д.
+
+```javascript
+const obj = { a: 1 };
+const arr = [1, 2, 3];
+function hello() { console.log("Hi!"); }
+```
+
+## Особенности типов
+
+### 1. Динамическая типизация
+- Тип определяется в runtime:
+  ```javascript
+  let x = 42;    // number
+  x = "hello";   // string (корректно)
+  ```
+
+### 2. Falsy-значения (приводятся к `false`):
+- `false`
+- `0`, `-0`, `NaN`
+- `""` (пустая строка)
+- `null`
+- `undefined`
+
+Все остальные значения - **truthy**:
+```javascript
+if ("hello") { /* выполнится */ }
+if ([]) { /* выполнится */ }
+```
+
+### 3. Объекты-обертки (Wrapper Objects)
+- Автоматическое "боксирование" примитивов:
+  ```javascript
+  const num = 42;
+  console.log(num.toFixed(2)); // "42.00" 
+  // JS временно создает Number-object
+  ```
+
+### 4. Проверка типов
+- Оператор `typeof`:
+  ```javascript
+  typeof 42;          // "number"
+  typeof "text";      // "string"
+  typeof undefined;   // "undefined"
+  typeof null;        // "object" (баг!)
+  typeof [];          // "object"
+  typeof function(){} // "function"
+  ```
+
+- Безопасная проверка на null:
+  ```javascript
+  function isNull(value) {
+    return value === null;
+  }
+  ```
+
+## Примеры проблем
+### Сравнение объектов
+```javascript
+const a = { x: 1 };
+const b = { x: 1 };
+console.log(a == b); // false (сравнение ссылок!)
+```
+
+### Копирование объектов
+```javascript
+const original = { x: 1 };
+const copy = original; // копируется ссылка!
+copy.x = 2;
+console.log(original.x); // 2 (!)
+```
+
+**Решение**: глубокое копирование
+```javascript
+const trueCopy = JSON.parse(JSON.stringify(original));
+// или через Object.assign (поверхностная копия)
+```
+
+## Полезные ссылки
+- [Таблица сравнения типов](https://dorey.github.io/JavaScript-Equality-Table/)
+- [MDN: Типы данных](https://developer.mozilla.org/ru/docs/Web/JavaScript/Data_structures)
+
